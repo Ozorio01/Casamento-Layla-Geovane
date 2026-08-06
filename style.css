@@ -3,23 +3,23 @@
    ================================================================= */
 :root {
   /* Cores de Fundo */
-  --ivory: #F8F5F0;        /* Off-white quente e claro */
-  --sage: #E9EBE2;         /* Tom sálvia suave */
+  --ivory: #F8F5F0;
+  --sage: #E9EBE2;
   
   /* Cores Principais - Azul/Verde */
-  --forest: #96A8C8;      /* Azul médio refinado */
-  --forest-deep: #4A638F; /* Azul profundo rico */
-  --sage-line: #526B8E;   /* Azul-cinza escuro para linhas e separadores de alto contraste */
+  --forest: #96A8C8;
+  --forest-deep: #4A638F;
+  --sage-line: #526B8E;
 
-  /* Cores de Detalhe - Ouro escuro refinado para máxima legibilidade */
-  --gold: #C58B38;        /* Ouro quente e encorpado */
-  --gold-deep: #8F5E1B;   /* Ouro escuro/bronze para textos pequenos e bordas */
+  /* Cores de Detalhe */
+  --gold: #C58B38;
+  --gold-deep: #8F5E1B;
 
   /* Cores de Texto */
-  --ink: #1C201A;         /* Preto suave para textos corridos */
-  --ink-soft: #383E34;    /* Cinza-escuro fechado para melhor leitura de textos secundários */
-  --ink-blue: #0F172A;    /* Azul-preto de altíssimo contraste para títulos e CTAs */
-  --white: #FFFEFA;       /* Branco off-white puro */
+  --ink: #1C201A;
+  --ink-soft: #383E34;
+  --ink-blue: #0F172A;
+  --white: #FFFEFA;
 
   /* Fontes */
   --display: "Fraunces", serif;
