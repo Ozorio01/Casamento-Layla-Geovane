@@ -1,4 +1,10 @@
 // =====================================================================
+// GARANTE QUE O DOM ESTÁ TOTALMENTE CARREGADO ANTES DE RODAR O SCRIPT
+// (proteção extra contra problemas de timing/cache)
+// =====================================================================
+document.addEventListener('DOMContentLoaded', () => {
+
+// =====================================================================
 // DATA E HORA DO CASAMENTO
 // =====================================================================
 const WEDDING_DATE = '2028-09-30T16:30:00';
@@ -165,18 +171,28 @@ document.getElementById('backToCartBtn')?.addEventListener('click', () => {
   cartModal.removeAttribute('hidden');
 });
 
-// Adicionar Item ao Carrinho (Captura o evento nos botões com classe .add-to-cart-btn)
-document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-  button.addEventListener('click', (e) => {
-    const btn = e.currentTarget;
-    const id = btn.getAttribute('data-id');
-    const title = btn.getAttribute('data-title');
-    const price = parseFloat(btn.getAttribute('data-price'));
+// Adicionar Item ao Carrinho
+// IMPORTANTE: usamos DELEGAÇÃO DE EVENTOS (um único listener no container
+// #giftsGrid, que sempre existe) em vez de anexar um listener em cada botão
+// individualmente. Isso evita o bug em que os botões "Presentear" ficavam
+// sem resposta: com querySelectorAll + forEach, se o script rodar antes de
+// algum botão existir no DOM (ex: cache de navegador servindo uma versão
+// antiga da página, ou algum atraso de renderização), aquele botão nunca
+// recebe o evento e o clique não faz nada — sem erro nenhum no console.
+// Com delegação, o clique é sempre capturado pelo container pai.
+const giftsGrid = document.getElementById('giftsGrid');
 
-    cart.push({ id, title, price });
-    updateCartUI();
-    cartModal.removeAttribute('hidden');
-  });
+giftsGrid?.addEventListener('click', (e) => {
+  const btn = e.target.closest('.add-to-cart-btn');
+  if (!btn || !giftsGrid.contains(btn)) return;
+
+  const id = btn.getAttribute('data-id');
+  const title = btn.getAttribute('data-title');
+  const price = parseFloat(btn.getAttribute('data-price'));
+
+  cart.push({ id, title, price });
+  updateCartUI();
+  cartModal.removeAttribute('hidden');
 });
 
 // Renderizar itens do carrinho
@@ -252,3 +268,5 @@ document.getElementById('payPixModalBtn')?.addEventListener('click', () => {
   alert(`Chave Pix (${pixKey}) copiada com sucesso! Transfira o valor do presente pelo aplicativo do seu banco.`);
   paymentModal.setAttribute('hidden', 'true');
 });
+
+}); // fim do DOMContentLoaded
