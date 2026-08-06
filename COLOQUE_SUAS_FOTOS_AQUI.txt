@@ -1,7 +1,0 @@
-Coloque aqui os arquivos de foto do casal.
-
-Nomes que o site já espera (para não precisar editar o HTML):
-- casal.jpg   → foto usada na seção "Nossa história"
-- foto1.jpg até foto6.jpg → fotos da galeria
-
-Depois de colocar suas fotos com esses nomes, pode apagar este arquivo de texto.
