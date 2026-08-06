@@ -58,7 +58,7 @@ a { color: inherit; }
   align-items: center;
   justify-content: space-between;
   padding: 18px 32px;
-  background: rgba(34, 48, 38, 0.92);
+  background: rgba(31, 42, 68, 0.92);
   backdrop-filter: blur(6px);
 }
 
@@ -186,7 +186,7 @@ a { color: inherit; }
   font-family: var(--mono);
   font-size: 0.9rem;
   letter-spacing: 0.08em;
-  color: var(--sage);
+  color: var(--ink-blue);
   margin: 0 0 44px;
 }
 
@@ -277,7 +277,7 @@ a { color: inherit; }
   font-size: clamp(1.9rem, 4vw, 2.7rem);
   text-align: center;
   margin: 0 0 20px;
-  color: var(--forest);
+  color: var(--ink-blue);
 }
 
 .section__title--light { color: var(--ink-blue); }
@@ -468,8 +468,8 @@ a { color: inherit; }
   align-self: flex-start;
   margin-top: 8px;
   padding: 14px 32px;
-  background: var(--forest);
-  color: var(--white);
+  background: var(--ink-blue);
+  color: var(--ivory);
   border: none;
   font-family: var(--mono);
   font-size: 0.78rem;
@@ -485,7 +485,7 @@ a { color: inherit; }
   margin-top: 24px;
   font-family: var(--mono);
   font-size: 0.9rem;
-  color: var(--forest);
+  color: var(--ink-blue);
   text-align: center;
 }
 
@@ -512,7 +512,7 @@ a { color: inherit; }
 .pix__key {
   font-family: var(--mono);
   font-size: 1.05rem;
-  color: var(--forest);
+  color: var(--ink-blue);
   margin: 0 0 20px;
   word-break: break-all;
 }
@@ -520,8 +520,8 @@ a { color: inherit; }
 .pix__copy {
   padding: 10px 26px;
   background: transparent;
-  border: 1px solid var(--forest);
-  color: var(--forest);
+  border: 1px solid var(--ink-blue);
+  color: var(--ink-blue);
   font-family: var(--mono);
   font-size: 0.75rem;
   letter-spacing: 0.08em;
@@ -530,7 +530,7 @@ a { color: inherit; }
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-.pix__copy:hover { background: var(--forest); color: var(--white); }
+.pix__copy:hover { background: var(--ink-blue); color: var(--ivory); }
 
 /* =================================================================
    FOOTER
