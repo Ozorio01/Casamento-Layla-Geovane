@@ -1,18 +1,27 @@
 /* =================================================================
-   TOKENS — troque as cores e fontes aqui para mudar a cara do site
+   TOKENS — NOVA PALETA REFINADA
    ================================================================= */
 :root {
-  --forest: #92A8D1;
-  --forest-deep: #5D7AA6;
-  --ivory: #F3EFE6;
-  --sage: #E4E7DA;
-  --sage-line: #5D7AA6;
-  --gold: #C6A15B;
-  --ink: #262B23;
-  --ink-soft: #5A6154;
-  --ink-blue: #1F2A44;
-  --white: #FFFDF8;
+  /* Cores de Fundo - Refinadas para maior calor */
+  --ivory: #F8F5F0;       /* Ligeiramente mais claro e quente que o original */
+  --sage: #E9EBE2;        /* Tom sálvia mais suave */
+  
+  /* Cores Principais - Azul/Verde mais profundo */
+  --forest: #96A8C8;      /* Azul médio refinado, mais profundo */
+  --forest-deep: #4A638F; /* Azul profundo mais rico (menos acinzentado) */
+  --sage-line: #7A90B1;   /* Cor de linha mais visível sobre o azul */
 
+  /* Cores de Detalhe - Ouro mais quente e rico */
+  --gold: #D4A76A;        /* Ouro mais vibrante e quente */
+  --gold-deep: #B58B55;   /* Um tom de ouro mais escuro para melhor contraste */
+
+  /* Cores de Texto - Preto mais suave e azul de alto contraste */
+  --ink: #1C201A;         /* Preto levemente mais profundo para texto principal */
+  --ink-soft: #4D5347;    /* Cinza escuro para textos secundários (melhor contraste) */
+  --ink-blue: #141B2B;    /* Azul-preto de altíssimo contraste para títulos */
+  --white: #FFFEFA;       /* Branco off-white puro */
+
+  /* Fontes (inalteradas) */
   --display: "Fraunces", serif;
   --body: "Work Sans", sans-serif;
   --mono: "Space Mono", monospace;
@@ -58,7 +67,7 @@ a { color: inherit; }
   align-items: center;
   justify-content: space-between;
   padding: 18px 32px;
-  background: rgba(31, 42, 68, 0.92);
+  background: rgba(20, 27, 43, 0.95); /* Usando --ink-blue mais opaco */
   backdrop-filter: blur(6px);
 }
 
@@ -125,7 +134,8 @@ a { color: inherit; }
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: radial-gradient(120% 90% at 50% 0%, #B7C6E0 0%, var(--forest) 45%, var(--forest-deep) 100%);
+  /* Degradê ligeiramente mais suave e profundo */
+  background: radial-gradient(120% 90% at 50% 0%, #BCCDE8 0%, var(--forest) 55%, var(--forest-deep) 100%);
   color: var(--ink-blue);
   padding: 120px 24px 80px;
   overflow: hidden;
@@ -135,7 +145,7 @@ a { color: inherit; }
   position: absolute;
   width: 220px;
   height: 420px;
-  opacity: 0.35;
+  opacity: 0.25; /* Opacidade reduzida para não brigar com o texto */
   background:
     linear-gradient(var(--sage-line), var(--sage-line)) center/2px 100% no-repeat,
     radial-gradient(circle, var(--sage-line) 40%, transparent 41%) 30% 20%/26px 26px no-repeat,
@@ -151,7 +161,8 @@ a { color: inherit; }
   font-size: 0.75rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--gold);
+  /* MELHORIA DE CONTRASTE: Usando ouro mais escuro */
+  color: var(--gold-deep);
   margin: 0 0 18px;
 }
 
@@ -166,6 +177,7 @@ a { color: inherit; }
   gap: 0.35em;
   flex-wrap: wrap;
   justify-content: center;
+  color: var(--ink-blue); /* Garantindo que o nome seja bem visível */
 }
 
 .hero__amp {
@@ -186,6 +198,7 @@ a { color: inherit; }
   font-family: var(--mono);
   font-size: 0.9rem;
   letter-spacing: 0.08em;
+  /* MELHORIA DE CONTRASTE: Usando um texto mais escuro */
   color: var(--ink-blue);
   margin: 0 0 44px;
 }
@@ -216,26 +229,29 @@ a { color: inherit; }
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--sage-line);
+  /* MELHORIA DE CONTRASTE: Sálvia mais forte */
+  color: var(--forest-deep); 
   margin-top: 6px;
 }
 
 .hero__cta {
   display: inline-block;
   padding: 14px 34px;
-  border: 1px solid var(--gold);
-  color: var(--gold);
+  /* MELHORIA DE CONTRASTE: Borda em ouro escuro */
+  border: 1px solid var(--gold-deep);
+  color: var(--gold-deep);
   text-decoration: none;
   font-family: var(--mono);
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition: background 0.25s ease, color 0.25s ease;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 .hero__cta:hover {
   background: var(--gold);
   color: var(--forest-deep);
+  border-color: var(--gold);
 }
 
 /* =================================================================
@@ -368,7 +384,7 @@ a { color: inherit; }
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--sage-line);
+  color: var(--forest-deep); /* Melhor contraste sobre o azul */
   margin: 0 0 10px;
 }
 
@@ -397,7 +413,8 @@ a { color: inherit; }
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  /* MELHORIA DE ESPAÇAMENTO: Aumentado de 12px para 16px */
+  gap: 16px;
 }
 
 .gallery__item {
@@ -449,7 +466,9 @@ a { color: inherit; }
   font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  /* MELHORIA DE CONTRASTE: Usando texto principal escuro */
+  color: var(--ink);
+  font-weight: 500;
 }
 
 .rsvp input,
@@ -476,10 +495,20 @@ a { color: inherit; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s ease;
+  border-radius: var(--radius);
+  /* MELHORIA VISUAL: Adicionado sombra sutil e transição */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
-.rsvp__submit:hover { background: var(--forest-deep); }
+.rsvp__submit:hover { 
+  background: var(--forest-deep); 
+}
+
+.rsvp__submit:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
 
 .rsvp__success {
   margin-top: 24px;
@@ -498,6 +527,7 @@ a { color: inherit; }
   background: var(--sage);
   border: 1px solid var(--sage-line);
   text-align: center;
+  border-radius: var(--radius);
 }
 
 .pix__label {
@@ -528,6 +558,7 @@ a { color: inherit; }
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
+  border-radius: var(--radius);
 }
 
 .pix__copy:hover { background: var(--ink-blue); color: var(--ivory); }
@@ -536,8 +567,9 @@ a { color: inherit; }
    FOOTER
    ================================================================= */
 .footer {
-  background: var(--ink-blue);
-  color: var(--ivory);
+  /* MELHORIA DE COR: Usando um azul profundo, mas ligeiramente mais suave */
+  background: #192135; 
+  color: var(--sage); /* Texto sálvia suave é mais quente que marfim */
   text-align: center;
   padding: 48px 24px;
   font-family: var(--mono);
