@@ -12,11 +12,15 @@ const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
 
 navToggle?.addEventListener('click', () => {
-  navLinks.classList.toggle('is-open');
+  const isOpen = navLinks.classList.toggle('is-open');
+  navToggle.setAttribute('aria-expanded', String(isOpen));
 });
 
 navLinks?.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => navLinks.classList.remove('is-open'));
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('is-open');
+    navToggle?.setAttribute('aria-expanded', 'false');
+  });
 });
 
 // -------------------------------------------------------------------
@@ -98,16 +102,69 @@ rsvpForm?.addEventListener('submit', (event) => {
 
 // -------------------------------------------------------------------
 // Copiar chave Pix
+// Correção: antes o código sobrescrevia o textContent do botão inteiro,
+// o que apagava o ícone SVG na primeira vez que era clicado. Agora o
+// texto é trocado só dentro do <span class="pix__copy-label">, e um
+// status separado (com aria-live) avisa leitores de tela.
 // -------------------------------------------------------------------
 const pixCopyBtn = document.getElementById('pixCopyBtn');
 const pixKey = document.getElementById('pixKey');
+const pixCopyLabel = pixCopyBtn?.querySelector('.pix__copy-label');
+const pixCopyStatus = document.getElementById('pixCopyStatus');
 
 pixCopyBtn?.addEventListener('click', async () => {
+  const key = pixKey.textContent.trim();
+
   try {
-    await navigator.clipboard.writeText(pixKey.textContent.trim());
-    pixCopyBtn.textContent = 'Copiado!';
-    setTimeout(() => { pixCopyBtn.textContent = 'Copiar chave'; }, 2000);
+    await navigator.clipboard.writeText(key);
+    setCopiedState(true);
   } catch (err) {
-    alert('Não foi possível copiar automaticamente. Copie manualmente: ' + pixKey.textContent.trim());
+    setCopiedState(false, true);
   }
+});
+
+function setCopiedState(success, manualFallback = false) {
+  if (!pixCopyLabel) return;
+
+  if (success) {
+    pixCopyBtn.classList.add('is-copied');
+    pixCopyLabel.textContent = 'Chave copiada!';
+    if (pixCopyStatus) pixCopyStatus.textContent = 'Chave Pix copiada para a área de transferência.';
+  } else if (manualFallback) {
+    if (pixCopyStatus) {
+      pixCopyStatus.textContent = `Não foi possível copiar automaticamente. Chave: ${pixKey.textContent.trim()}`;
+    }
+    return;
+  }
+
+  setTimeout(() => {
+    pixCopyBtn.classList.remove('is-copied');
+    pixCopyLabel.textContent = 'Copiar chave Pix';
+    if (pixCopyStatus) pixCopyStatus.textContent = '';
+  }, 2200);
+}
+
+// -------------------------------------------------------------------
+// Filtro de presentes por categoria
+// -------------------------------------------------------------------
+const giftFilters = document.getElementById('giftFilters');
+const giftCards = document.querySelectorAll('.gift__card');
+
+giftFilters?.addEventListener('click', (event) => {
+  const btn = event.target.closest('.gifts__filter');
+  if (!btn) return;
+
+  const filter = btn.dataset.filter;
+
+  giftFilters.querySelectorAll('.gifts__filter').forEach((f) => {
+    f.classList.remove('is-active');
+    f.setAttribute('aria-selected', 'false');
+  });
+  btn.classList.add('is-active');
+  btn.setAttribute('aria-selected', 'true');
+
+  giftCards.forEach((card) => {
+    const matches = filter === 'todos' || card.dataset.category === filter;
+    card.classList.toggle('gift__card--hidden', !matches);
+  });
 });
