@@ -521,13 +521,50 @@ a { color: inherit; }
 }
 
 /* =================================================================
+   FILTROS DE PRESENTES
+   ================================================================= */
+.gifts__filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.gifts__filter {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--sage-line);
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.gifts__filter:hover {
+  border-color: var(--gold-deep);
+  color: var(--ink-blue);
+}
+
+.gifts__filter.is-active {
+  background: var(--ink-blue);
+  border-color: var(--ink-blue);
+  color: var(--white);
+}
+
+/* =================================================================
    ESTILOS DA LISTA DE PRESENTES (APRIMORADOS)
    ================================================================= */
 .gifts__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 28px;
-  margin-top: 40px;
+  margin-top: 32px;
 }
 
 .gift__card {
@@ -539,12 +576,21 @@ a { color: inherit; }
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease;
 }
 
 .gift__card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.09);
+}
+
+.gift__card--hidden {
+  display: none;
+}
+
+.gift__card--featured {
+  border-color: var(--gold-deep);
+  box-shadow: 0 0 0 1px var(--gold-deep), 0 10px 24px rgba(143, 94, 27, 0.12);
 }
 
 .gift__card--custom {
@@ -578,6 +624,11 @@ a { color: inherit; }
 
 .gift__badge--highlight {
   background: var(--gold);
+  color: var(--white);
+}
+
+.gift__badge--featured {
+  background: var(--gold-deep);
   color: var(--white);
 }
 
@@ -719,6 +770,21 @@ a { color: inherit; }
   transform: translateY(1px);
 }
 
+.pix__copy.is-copied {
+  background: var(--gold-deep);
+  border-color: var(--gold-deep);
+  color: var(--white);
+}
+
+.pix__status {
+  margin: 0;
+  min-height: 1em;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  text-align: center;
+  color: var(--gold-deep);
+}
+
 /* =================================================================
    FOOTER
    ================================================================= */
@@ -730,4 +796,12 @@ a { color: inherit; }
   font-family: var(--mono);
   font-size: 0.78rem;
   letter-spacing: 0.06em;
+}
+
+.footer__sprig {
+  width: 80px;
+  height: 2px;
+  background: var(--sage-line);
+  margin: 0 auto 20px;
+  opacity: 0.5;
 }
