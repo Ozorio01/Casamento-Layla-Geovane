@@ -1,27 +1,27 @@
 /* =================================================================
-   TOKENS — NOVA PALETA REFINADA
+   TOKENS — PALETA REFINADA E REAJUSTADA PARA ALTO CONTRASTE
    ================================================================= */
 :root {
-  /* Cores de Fundo - Refinadas para maior calor */
-  --ivory: #F8F5F0;       /* Ligeiramente mais claro e quente que o original */
-  --sage: #E9EBE2;        /* Tom sálvia mais suave */
+  /* Cores de Fundo */
+  --ivory: #F8F5F0;        /* Off-white quente e claro */
+  --sage: #E9EBE2;         /* Tom sálvia suave */
   
-  /* Cores Principais - Azul/Verde mais profundo */
-  --forest: #96A8C8;      /* Azul médio refinado, mais profundo */
-  --forest-deep: #4A638F; /* Azul profundo mais rico (menos acinzentado) */
-  --sage-line: #7A90B1;   /* Cor de linha mais visível sobre o azul */
+  /* Cores Principais - Azul/Verde */
+  --forest: #96A8C8;      /* Azul médio refinado */
+  --forest-deep: #4A638F; /* Azul profundo rico */
+  --sage-line: #526B8E;   /* Azul-cinza escuro para linhas e separadores de alto contraste */
 
-  /* Cores de Detalhe - Ouro mais quente e rico */
-  --gold: #D4A76A;        /* Ouro mais vibrante e quente */
-  --gold-deep: #B58B55;   /* Um tom de ouro mais escuro para melhor contraste */
+  /* Cores de Detalhe - Ouro escuro refinado para máxima legibilidade */
+  --gold: #C58B38;        /* Ouro quente e encorpado */
+  --gold-deep: #8F5E1B;   /* Ouro escuro/bronze para textos pequenos e bordas */
 
-  /* Cores de Texto - Preto mais suave e azul de alto contraste */
-  --ink: #1C201A;         /* Preto levemente mais profundo para texto principal */
-  --ink-soft: #4D5347;    /* Cinza escuro para textos secundários (melhor contraste) */
-  --ink-blue: #141B2B;    /* Azul-preto de altíssimo contraste para títulos */
+  /* Cores de Texto */
+  --ink: #1C201A;         /* Preto suave para textos corridos */
+  --ink-soft: #383E34;    /* Cinza-escuro fechado para melhor leitura de textos secundários */
+  --ink-blue: #0F172A;    /* Azul-preto de altíssimo contraste para títulos e CTAs */
   --white: #FFFEFA;       /* Branco off-white puro */
 
-  /* Fontes (inalteradas) */
+  /* Fontes */
   --display: "Fraunces", serif;
   --body: "Work Sans", sans-serif;
   --mono: "Space Mono", monospace;
@@ -67,7 +67,7 @@ a { color: inherit; }
   align-items: center;
   justify-content: space-between;
   padding: 18px 32px;
-  background: rgba(20, 27, 43, 0.95); /* Usando --ink-blue mais opaco */
+  background: rgba(15, 23, 42, 0.95);
   backdrop-filter: blur(6px);
 }
 
@@ -134,7 +134,6 @@ a { color: inherit; }
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* Degradê ligeiramente mais suave e profundo */
   background: radial-gradient(120% 90% at 50% 0%, #BCCDE8 0%, var(--forest) 55%, var(--forest-deep) 100%);
   color: var(--ink-blue);
   padding: 120px 24px 80px;
@@ -145,7 +144,7 @@ a { color: inherit; }
   position: absolute;
   width: 220px;
   height: 420px;
-  opacity: 0.25; /* Opacidade reduzida para não brigar com o texto */
+  opacity: 0.25;
   background:
     linear-gradient(var(--sage-line), var(--sage-line)) center/2px 100% no-repeat,
     radial-gradient(circle, var(--sage-line) 40%, transparent 41%) 30% 20%/26px 26px no-repeat,
@@ -161,8 +160,8 @@ a { color: inherit; }
   font-size: 0.75rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  /* MELHORIA DE CONTRASTE: Usando ouro mais escuro */
   color: var(--gold-deep);
+  font-weight: 700;
   margin: 0 0 18px;
 }
 
@@ -177,19 +176,19 @@ a { color: inherit; }
   gap: 0.35em;
   flex-wrap: wrap;
   justify-content: center;
-  color: var(--ink-blue); /* Garantindo que o nome seja bem visível */
+  color: var(--ink-blue);
 }
 
 .hero__amp {
   font-style: italic;
   font-weight: 300;
-  color: var(--gold);
+  color: var(--gold-deep);
   font-size: 0.7em;
 }
 
 .hero__rule {
   width: 64px;
-  height: 1px;
+  height: 2px;
   background: var(--sage-line);
   margin: 28px 0 20px;
 }
@@ -198,7 +197,7 @@ a { color: inherit; }
   font-family: var(--mono);
   font-size: 0.9rem;
   letter-spacing: 0.08em;
-  /* MELHORIA DE CONTRASTE: Usando um texto mais escuro */
+  font-weight: 600;
   color: var(--ink-blue);
   margin: 0 0 44px;
 }
@@ -226,32 +225,34 @@ a { color: inherit; }
 
 .countdown__label {
   font-family: var(--mono);
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  /* MELHORIA DE CONTRASTE: Sálvia mais forte */
-  color: var(--forest-deep); 
+  color: var(--ink-blue);
+  font-weight: 700;
   margin-top: 6px;
 }
 
 .hero__cta {
   display: inline-block;
   padding: 14px 34px;
-  /* MELHORIA DE CONTRASTE: Borda em ouro escuro */
-  border: 1px solid var(--gold-deep);
-  color: var(--gold-deep);
+  background: var(--ink-blue);
+  color: var(--white);
+  border: 1px solid var(--ink-blue);
   text-decoration: none;
   font-family: var(--mono);
   font-size: 0.78rem;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 .hero__cta:hover {
-  background: var(--gold);
-  color: var(--forest-deep);
-  border-color: var(--gold);
+  background: var(--gold-deep);
+  color: var(--white);
+  border-color: var(--gold-deep);
 }
 
 /* =================================================================
@@ -277,15 +278,16 @@ a { color: inherit; }
 
 .section__eyebrow {
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--sage-line);
+  color: var(--gold-deep);
+  font-weight: 700;
   margin: 0 0 12px;
   text-align: center;
 }
 
-.section__eyebrow--light { color: var(--gold); }
+.section__eyebrow--light { color: var(--gold-deep); }
 
 .section__title {
   font-family: var(--display);
@@ -306,7 +308,7 @@ a { color: inherit; }
   line-height: 1.65;
 }
 
-.section--forest .section__lead { color: var(--sage); }
+.section--forest .section__lead { color: var(--ink-blue); font-weight: 500; }
 
 /* =================================================================
    HISTÓRIA
@@ -347,7 +349,7 @@ a { color: inherit; }
 
 .story__text p {
   line-height: 1.8;
-  color: var(--ink-soft);
+  color: var(--ink);
   font-size: 1.02rem;
 }
 
@@ -362,7 +364,7 @@ a { color: inherit; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
-  background: rgba(255,255,255,0.12);
+  background: rgba(15, 23, 42, 0.15);
   margin-top: 40px;
 }
 
@@ -373,7 +375,7 @@ a { color: inherit; }
 }
 
 .details__icon {
-  color: var(--gold);
+  color: var(--gold-deep);
   font-size: 1.1rem;
   display: block;
   margin-bottom: 10px;
@@ -381,10 +383,11 @@ a { color: inherit; }
 
 .details__card h3 {
   font-family: var(--mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--forest-deep); /* Melhor contraste sobre o azul */
+  color: var(--ink-blue);
+  font-weight: 700;
   margin: 0 0 10px;
 }
 
@@ -393,6 +396,7 @@ a { color: inherit; }
   font-size: 1.15rem;
   margin: 0;
   color: var(--ink-blue);
+  font-weight: 500;
 }
 
 @media (max-width: 760px) {
@@ -413,7 +417,6 @@ a { color: inherit; }
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* MELHORIA DE ESPAÇAMENTO: Aumentado de 12px para 16px */
   gap: 16px;
 }
 
@@ -463,12 +466,11 @@ a { color: inherit; }
 
 .rsvp__row label {
   font-family: var(--mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  /* MELHORIA DE CONTRASTE: Usando texto principal escuro */
   color: var(--ink);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .rsvp input,
@@ -496,7 +498,6 @@ a { color: inherit; }
   text-transform: uppercase;
   cursor: pointer;
   border-radius: var(--radius);
-  /* MELHORIA VISUAL: Adicionado sombra sutil e transição */
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: background 0.2s ease, transform 0.1s ease;
 }
@@ -532,10 +533,11 @@ a { color: inherit; }
 
 .pix__label {
   font-family: var(--mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-soft);
+  font-weight: 600;
   margin: 0 0 10px;
 }
 
@@ -543,6 +545,7 @@ a { color: inherit; }
   font-family: var(--mono);
   font-size: 1.05rem;
   color: var(--ink-blue);
+  font-weight: 600;
   margin: 0 0 20px;
   word-break: break-all;
 }
@@ -554,6 +557,7 @@ a { color: inherit; }
   color: var(--ink-blue);
   font-family: var(--mono);
   font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
@@ -567,9 +571,8 @@ a { color: inherit; }
    FOOTER
    ================================================================= */
 .footer {
-  /* MELHORIA DE COR: Usando um azul profundo, mas ligeiramente mais suave */
-  background: #192135; 
-  color: var(--sage); /* Texto sálvia suave é mais quente que marfim */
+  background: #0F172A; 
+  color: var(--sage);
   text-align: center;
   padding: 48px 24px;
   font-family: var(--mono);
