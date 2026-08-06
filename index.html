@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <!-- ============================================= -->
   <!-- MENU FIXO -->
   <!-- ============================================= -->
@@ -32,7 +31,6 @@
   <header class="hero" id="topo">
     <div class="hero__sprig hero__sprig--left" aria-hidden="true"></div>
     <div class="hero__sprig hero__sprig--right" aria-hidden="true"></div>
-
     <p class="hero__eyebrow">Vamos nos casar</p>
     <h1 class="hero__names">
       <span>Layla</span>
@@ -41,7 +39,6 @@
     </h1>
     <div class="hero__rule" aria-hidden="true"></div>
     <p class="hero__date" id="weddingDateLabel">30 de setembro de 2028 · 17h00</p>
-
     <div class="countdown" id="countdown" aria-label="Contagem regressiva para o casamento">
       <div class="countdown__unit">
         <span class="countdown__num" id="cd-dias">00</span>
@@ -60,7 +57,6 @@
         <span class="countdown__label">seg</span>
       </div>
     </div>
-
     <a href="#presenca" class="hero__cta">Confirmar presença</a>
   </header>
 
@@ -71,13 +67,11 @@
     <div class="section__inner">
       <p class="section__eyebrow">O casal</p>
       <h2 class="section__title">Nossa história</h2>
-
       <div class="story">
         <div class="story__photo">
           <img src="img/casal.jpg" alt="Foto de Layla e Geovane" onerror="this.closest('.story__photo').classList.add('story__photo--empty')">
           <span class="story__photo-hint">Troque por img/casal.jpg</span>
         </div>
-
         <div class="story__text">
           <p>
             Nossa história começou em 2016, durante o aniversário de um amigo em comum. Foi ali que nos conhecemos. Desde aquele dia, o brilho no olhar e a beleza da Layla não saíram mais da minha cabeça. Tentei me aproximar algumas vezes, mas nem tudo aconteceu como eu imaginava.
@@ -104,7 +98,6 @@
     <div class="section__inner">
       <p class="section__eyebrow section__eyebrow--light">Onde e quando</p>
       <h2 class="section__title section__title--light">Cerimônia &amp; recepção</h2>
-
       <div class="details">
         <div class="details__card">
           <span class="details__icon" aria-hidden="true">✦</span>
@@ -127,7 +120,6 @@
           <p>Esporte fino</p>
         </div>
       </div>
-
       <div class="map">
         <iframe
           title="Mapa do local da cerimônia - Rancho Verde Eventos"
@@ -146,7 +138,6 @@
     <div class="section__inner">
       <p class="section__eyebrow">Momentos</p>
       <h2 class="section__title">Galeria</h2>
-
       <div class="gallery">
         <figure class="gallery__item">
           <img src="img/foto1.jpg" alt="Foto 1 do casal" onerror="this.closest('.gallery__item').classList.add('gallery__item--empty')">
@@ -180,13 +171,11 @@
       <p class="section__lead">
         Preencha os campos abaixo para confirmar sua presença. Isso nos ajuda na organização do buffet e dos lugares.
       </p>
-
       <form class="rsvp" id="rsvpForm">
         <div class="rsvp__row">
           <label for="nome">Nome completo</label>
           <input type="text" id="nome" name="nome" required placeholder="Seu nome">
         </div>
-
         <div class="rsvp__row">
           <label for="acompanhantes">Quantas pessoas (incluindo você)</label>
           <select id="acompanhantes" name="acompanhantes">
@@ -196,7 +185,6 @@
             <option value="4">4</option>
           </select>
         </div>
-
         <div class="rsvp__row">
           <label for="presenca-select">Você vai?</label>
           <select id="presenca-select" name="presenca">
@@ -204,15 +192,12 @@
             <option value="nao">Não vou conseguir ir</option>
           </select>
         </div>
-
         <div class="rsvp__row">
           <label for="mensagem">Recado para o casal (opcional)</label>
           <textarea id="mensagem" name="mensagem" rows="3" placeholder="Deixe uma mensagem carinhosa"></textarea>
         </div>
-
         <button type="submit" class="rsvp__submit">Enviar confirmação</button>
       </form>
-
       <p class="rsvp__success" id="rsvpSuccess" role="status" hidden>
         Obrigado! Sua presença foi registrada nesta página. ✦
       </p>
@@ -225,58 +210,101 @@
   <section class="section section--ivory" id="presentes">
     <div class="section__inner">
       <p class="section__eyebrow">Mimos para os Noivos</p>
-      <h2 class="section__title">Lista de presentes</h2>
+      <h2 class="section__title">Lista de Presentes</h2>
       <p class="section__lead">
-        Sua presença é o nosso maior presente! Se desejar nos abençoar com algo a mais, escolha uma das opções abaixo para nos ajudar na nossa Lua de Mel e nova fase.
+        Sua presença é o nosso maior presente! Caso queira nos presentear de forma carinhosa, preparamos algumas opções simbólicas para nossa Lua de Mel e o início desta nova jornada.
       </p>
 
-      <!-- Grade de Presentes com Links para Mercado Pago -->
+      <!-- Grade de Presentes com Links para Mercado Pago e Cota Livre -->
       <div class="gifts__grid">
 
-        <!-- Card 1 -->
-        <div class="gift__card">
-          <div class="gift__icon">☕</div>
-          <h3 class="gift__title">Café da Manhã Especial</h3>
-          <p class="gift__desc">Um café reforçado para os noivos durante a viagem de Lua de Mel.</p>
-          <div class="gift__price">R$ 80,00</div>
-          <!-- Substitua o href abaixo pelo link gerado no Mercado Pago -->
-          <a href="https://mpago.la/31TZuqL">
-            Presentear (Cartão / Pix)
-          </a>
-        </div>
+        <!-- Card 1: Café da Manhã -->
+        <article class="gift__card">
+          <div class="gift__header">
+            <div class="gift__icon" aria-hidden="true">☕</div>
+            <span class="gift__badge">Lua de Mel</span>
+          </div>
+          <div class="gift__body">
+            <h3 class="gift__title">Café da Manhã Especial</h3>
+            <p class="gift__desc">Um café especial reforçado para energizar os noivos em um dia inesquecível da viagem.</p>
+          </div>
+          <div class="gift__footer">
+            <div class="gift__price-container">
+              <span class="gift__price-label">Valor sugerido</span>
+              <span class="gift__price">R$ 80,00</span>
+            </div>
+            <a href="https://mpago.la/31TZuqL" target="_blank" rel="noopener noreferrer" class="gift__btn">
+              <span>Presentear</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </article>
 
-        <!-- Card 2 -->
-        <div class="gift__card">
-          <div class="gift__icon">🥂</div>
-          <h3 class="gift__title">Jantar dos Noivos</h3>
-          <p class="gift__desc">Um jantar especial e romântico para celebrarmos nosso início.</p>
-          <div class="gift__price">R$ 150,00</div>
-          <!-- Substitua o href abaixo pelo link gerado no Mercado Pago -->
-          <a href="https://mpago.la/1m3u13e">
-            Presentear (Cartão / Pix)
-          </a>
-        </div>
+        <!-- Card 2: Jantar dos Noivos -->
+        <article class="gift__card">
+          <div class="gift__header">
+            <div class="gift__icon" aria-hidden="true">🥂</div>
+            <span class="gift__badge">Romântico</span>
+          </div>
+          <div class="gift__body">
+            <h3 class="gift__title">Jantar Romântico</h3>
+            <p class="gift__desc">Um jantar especial à luz de velas para celebrarmos o início do nosso casamento.</p>
+          </div>
+          <div class="gift__footer">
+            <div class="gift__price-container">
+              <span class="gift__price-label">Valor sugerido</span>
+              <span class="gift__price">R$ 150,00</span>
+            </div>
+            <a href="https://mpago.la/1m3u13e" target="_blank" rel="noopener noreferrer" class="gift__btn">
+              <span>Presentear</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </article>
 
-        <!-- Card 3 -->
-        <div class="gift__card">
-          <div class="gift__icon">🧳</div>
-          <h3 class="gift__title">Passeio na Lua de Mel</h3>
-          <p class="gift__desc">Um passeio inesquecível para guardarmos para sempre no coração.</p>
-          <div class="gift__price">R$ 250,00</div>
-          <!-- Substitua o href abaixo pelo link gerado no Mercado Pago -->
-          <a href="https://mpago.la/2yRt3de">
-            Presentear (Cartão / Pix)
-          </a>
-        </div>
+        <!-- Card 3: Passeio na Lua de Mel -->
+        <article class="gift__card">
+          <div class="gift__header">
+            <div class="gift__icon" aria-hidden="true">🧳</div>
+            <span class="gift__badge">Experiência</span>
+          </div>
+          <div class="gift__body">
+            <h3 class="gift__title">Passeio de Lua de Mel</h3>
+            <p class="gift__desc">Um passeio guiado inesquecível para guardarmos lindas memórias no coração.</p>
+          </div>
+          <div class="gift__footer">
+            <div class="gift__price-container">
+              <span class="gift__price-label">Valor sugerido</span>
+              <span class="gift__price">R$ 250,00</span>
+            </div>
+            <a href="https://mpago.la/2yRt3de" target="_blank" rel="noopener noreferrer" class="gift__btn">
+              <span>Presentear</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </article>
 
-        <!-- Card 4 (Pix Livre / Chave Direta) -->
-        <div class="gift__card gift__card--custom">
-          <div class="gift__icon">🎁</div>
-          <h3 class="gift__title">Cota Livre / Pix Direto</h3>
-          <p class="gift__desc">Prefere contribuir com outro valor? Use nossa chave Pix direta.</p>
-          <div class="pix__key" id="pixKey">19971706455</div>
-          <button class="pix__copy" id="pixCopyBtn">Copiar Chave Pix</button>
-        </div>
+        <!-- Card 4: Pix Livre / Chave Direta -->
+        <article class="gift__card gift__card--custom">
+          <div class="gift__header">
+            <div class="gift__icon" aria-hidden="true">🎁</div>
+            <span class="gift__badge gift__badge--highlight">Livre Escolha</span>
+          </div>
+          <div class="gift__body">
+            <h3 class="gift__title">Cota Livre / Pix Direto</h3>
+            <p class="gift__desc">Sinta-se à vontade para contribuir com qualquer valor diretamente via Pix.</p>
+          </div>
+          <div class="gift__footer gift__footer--pix">
+            <div class="pix__box">
+              <span class="pix__label">Chave Pix (Celular):</span>
+              <code class="pix__key" id="pixKey">19971706455</code>
+            </div>
+            <button class="pix__copy" id="pixCopyBtn" type="button">
+              <span>Copiar Chave Pix</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+          </div>
+        </article>
 
       </div>
     </div>
