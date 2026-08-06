@@ -15,7 +15,7 @@
   <!-- ============================================= -->
   <nav class="nav" id="nav">
     <a href="#topo" class="nav__brand">L &amp; G</a>
-    <button class="nav__toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    <button class="nav__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">☰</button>
     <ul class="nav__links" id="navLinks">
       <li><a href="#historia">Nossa história</a></li>
       <li><a href="#cerimonia">Cerimônia</a></li>
@@ -215,11 +215,41 @@
         Sua presença é o nosso maior presente! Caso queira nos presentear de forma carinhosa, preparamos algumas opções simbólicas para nossa Lua de Mel e o início desta nova jornada.
       </p>
 
+      <!-- Filtro por categoria -->
+      <div class="gifts__filters" id="giftFilters" role="tablist" aria-label="Filtrar presentes por categoria">
+        <button type="button" class="gifts__filter is-active" data-filter="todos" role="tab" aria-selected="true">Todos</button>
+        <button type="button" class="gifts__filter" data-filter="lua-de-mel" role="tab" aria-selected="false">Lua de Mel</button>
+        <button type="button" class="gifts__filter" data-filter="casa-nova" role="tab" aria-selected="false">Casa Nova</button>
+        <button type="button" class="gifts__filter" data-filter="livre" role="tab" aria-selected="false">Livre Escolha</button>
+      </div>
+
       <!-- Grade de Presentes com Links para Mercado Pago e Cota Livre -->
       <div class="gifts__grid">
 
-        <!-- Card 1: Café da Manhã -->
-        <article class="gift__card">
+        <!-- Card 1: Passagem Aérea (destaque) -->
+        <article class="gift__card gift__card--featured" data-category="lua-de-mel">
+          <div class="gift__header">
+            <div class="gift__icon" aria-hidden="true">✈️</div>
+            <span class="gift__badge gift__badge--featured">Mais escolhido</span>
+          </div>
+          <div class="gift__body">
+            <h3 class="gift__title">Cota da Passagem Aérea</h3>
+            <p class="gift__desc">Ajude a construir nossa viagem dos sonhos contribuindo com uma cota da passagem.</p>
+          </div>
+          <div class="gift__footer">
+            <div class="gift__price-container">
+              <span class="gift__price-label">Valor sugerido</span>
+              <span class="gift__price">R$ 200,00</span>
+            </div>
+            <a href="https://mpago.la/31TZuqL" target="_blank" rel="noopener noreferrer" class="gift__btn">
+              <span>Presentear</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 2: Café da Manhã -->
+        <article class="gift__card" data-category="lua-de-mel">
           <div class="gift__header">
             <div class="gift__icon" aria-hidden="true">☕</div>
             <span class="gift__badge">Lua de Mel</span>
@@ -240,8 +270,8 @@
           </div>
         </article>
 
-        <!-- Card 2: Jantar dos Noivos -->
-        <article class="gift__card">
+        <!-- Card 3: Jantar dos Noivos -->
+        <article class="gift__card" data-category="lua-de-mel">
           <div class="gift__header">
             <div class="gift__icon" aria-hidden="true">🥂</div>
             <span class="gift__badge">Romântico</span>
@@ -262,8 +292,8 @@
           </div>
         </article>
 
-        <!-- Card 3: Passeio na Lua de Mel -->
-        <article class="gift__card">
+        <!-- Card 4: Passeio na Lua de Mel -->
+        <article class="gift__card" data-category="lua-de-mel">
           <div class="gift__header">
             <div class="gift__icon" aria-hidden="true">🧳</div>
             <span class="gift__badge">Experiência</span>
@@ -284,8 +314,52 @@
           </div>
         </article>
 
-        <!-- Card 4: Pix Livre / Chave Direta -->
-        <article class="gift__card gift__card--custom">
+        <!-- Card 5: Enxoval de Cama -->
+        <article class="gift__card" data-category="casa-nova">
+          <div class="gift__header">
+            <div class="gift__icon" aria-hidden="true">🛏️</div>
+            <span class="gift__badge">Casa Nova</span>
+          </div>
+          <div class="gift__body">
+            <h3 class="gift__title">Jogo de Cama Novo</h3>
+            <p class="gift__desc">Para começarmos essa nova fase com todo aconchego, dormindo em um ninho novinho.</p>
+          </div>
+          <div class="gift__footer">
+            <div class="gift__price-container">
+              <span class="gift__price-label">Valor sugerido</span>
+              <span class="gift__price">R$ 180,00</span>
+            </div>
+            <a href="https://mpago.la/31TZuqL" target="_blank" rel="noopener noreferrer" class="gift__btn">
+              <span>Presentear</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 6: Kit Cozinha -->
+        <article class="gift__card" data-category="casa-nova">
+          <div class="gift__header">
+            <div class="gift__icon" aria-hidden="true">🍳</div>
+            <span class="gift__badge">Casa Nova</span>
+          </div>
+          <div class="gift__body">
+            <h3 class="gift__title">Kit para a Cozinha</h3>
+            <p class="gift__desc">Panelas, utensílios e tudo o que precisamos para cozinhar nossas primeiras refeições juntos.</p>
+          </div>
+          <div class="gift__footer">
+            <div class="gift__price-container">
+              <span class="gift__price-label">Valor sugerido</span>
+              <span class="gift__price">R$ 120,00</span>
+            </div>
+            <a href="https://mpago.la/1m3u13e" target="_blank" rel="noopener noreferrer" class="gift__btn">
+              <span>Presentear</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 7: Pix Livre / Chave Direta -->
+        <article class="gift__card gift__card--custom" data-category="livre">
           <div class="gift__header">
             <div class="gift__icon" aria-hidden="true">🎁</div>
             <span class="gift__badge gift__badge--highlight">Livre Escolha</span>
@@ -299,10 +373,13 @@
               <span class="pix__label">Chave Pix (Celular):</span>
               <code class="pix__key" id="pixKey">19971706455</code>
             </div>
-            <button class="pix__copy" id="pixCopyBtn" type="button">
-              <span>Copiar Chave Pix</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <button class="pix__copy" id="pixCopyBtn" type="button" aria-describedby="pixCopyStatus">
+              <span class="pix__copy-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </span>
+              <span class="pix__copy-label">Copiar chave Pix</span>
             </button>
+            <p class="pix__status" id="pixCopyStatus" role="status" aria-live="polite"></p>
           </div>
         </article>
 
