@@ -3,7 +3,7 @@
 // Formato: 'AAAA-MM-DDTHH:MM:SS'  (ano-mês-dia T hora:minuto:segundo)
 // Exemplo para 12 de agosto de 2028 às 16h30:  '2028-08-12T16:30:00'
 // =====================================================================
-const WEDDING_DATE = '2028-08-12T16:30:00';
+const WEDDING_DATE = '2028-09-30T16:30:00';
 
 // -------------------------------------------------------------------
 // Menu mobile
