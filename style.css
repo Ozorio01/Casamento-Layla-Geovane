@@ -96,10 +96,12 @@ a { color: inherit; }
   padding: 0;
 }
 
+/* AJUSTE: Cor alterada para branco puro e peso aumentado para melhor leitura */
 .nav__links a {
   text-decoration: none;
-  color: var(--sage);
+  color: var(--white);
   font-size: 0.85rem;
+  font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   transition: color 0.2s ease;
@@ -155,12 +157,13 @@ a { color: inherit; }
 .hero__sprig--left { top: -40px; left: -60px; transform: rotate(-8deg); }
 .hero__sprig--right { bottom: -40px; right: -60px; transform: rotate(174deg); }
 
+/* AJUSTE: Mudar de var(--gold-deep) para var(--ink-blue) garante leitura perfeita no azul claro */
 .hero__eyebrow {
   font-family: var(--mono);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--gold-deep);
+  color: var(--ink-blue);
   font-weight: 700;
   margin: 0 0 18px;
 }
@@ -233,26 +236,27 @@ a { color: inherit; }
   margin-top: 6px;
 }
 
+/* AJUSTE: Botão com tom Ouro/Bronze para destacar e contrastar fortemente */
 .hero__cta {
   display: inline-block;
   padding: 14px 34px;
-  background: var(--ink-blue);
+  background: var(--gold-deep);
   color: var(--white);
-  border: 1px solid var(--ink-blue);
+  border: 1px solid var(--gold-deep);
   text-decoration: none;
   font-family: var(--mono);
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  transition: all 0.25s ease;
 }
 
 .hero__cta:hover {
-  background: var(--gold-deep);
+  background: var(--ink-blue);
   color: var(--white);
-  border-color: var(--gold-deep);
+  border-color: var(--ink-blue);
 }
 
 /* =================================================================
@@ -520,7 +524,7 @@ a { color: inherit; }
 }
 
 /* =================================================================
-   PIX
+   PIX / PRESENTES
    ================================================================= */
 .pix {
   margin-top: 40px;
@@ -531,13 +535,14 @@ a { color: inherit; }
   border-radius: var(--radius);
 }
 
+/* AJUSTE: Cor do texto escurecida para leitura limpa sobre o fundo var(--sage) */
 .pix__label {
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink-soft);
-  font-weight: 600;
+  color: var(--ink-blue);
+  font-weight: 700;
   margin: 0 0 10px;
 }
 
