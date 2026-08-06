@@ -1,11 +1,9 @@
 // =====================================================================
-// TROQUE AQUI A DATA E HORA DO CASAMENTO
+// DATA E HORA DO CASAMENTO
 // =====================================================================
 const WEDDING_DATE = '2028-09-30T16:30:00';
 
-// -------------------------------------------------------------------
-// Menu mobile
-// -------------------------------------------------------------------
+// Menu Mobile
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
 
@@ -21,9 +19,7 @@ navLinks?.querySelectorAll('a').forEach((link) => {
   });
 });
 
-// -------------------------------------------------------------------
-// Contagem regressiva
-// -------------------------------------------------------------------
+// Contagem Regressiva
 function updateCountdown() {
   const target = new Date(WEDDING_DATE).getTime();
   const now = Date.now();
@@ -60,7 +56,7 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// Data legível no topo
+// Data formatada no topo
 const dateLabel = document.getElementById('weddingDateLabel');
 if (dateLabel) {
   const d = new Date(WEDDING_DATE);
@@ -75,7 +71,7 @@ if (dateLabel) {
   }
 }
 
-// RSVP Form
+// RSVP
 const rsvpForm = document.getElementById('rsvpForm');
 const rsvpSuccess = document.getElementById('rsvpSuccess');
 
@@ -85,7 +81,7 @@ rsvpForm?.addEventListener('submit', (event) => {
   rsvpSuccess.hidden = false;
 });
 
-// Copiar chave Pix
+// Copiar Chave Pix Simples
 const pixCopyBtn = document.getElementById('pixCopyBtn');
 const pixKey = document.getElementById('pixKey');
 const pixCopyLabel = pixCopyBtn?.querySelector('.pix__copy-label');
@@ -122,7 +118,7 @@ function setCopiedState(success, manualFallback = false) {
   }, 2200);
 }
 
-// Filtro de presentes por categoria
+// Filtro de Categorias
 const giftFilters = document.getElementById('giftFilters');
 const giftCards = document.querySelectorAll('.gift__card');
 
@@ -146,7 +142,7 @@ giftFilters?.addEventListener('click', (event) => {
 });
 
 // =====================================================================
-// SISTEMA COMPLETO DE CARRINHO E CHECKOUT
+// SISTEMA DE CARRINHO E CHECKOUT
 // =====================================================================
 let cart = [];
 
@@ -156,7 +152,7 @@ const cartCount = document.getElementById('cartCount');
 const cartItemsContainer = document.getElementById('cartItemsContainer');
 const cartTotalValue = document.getElementById('cartTotalValue');
 
-// Abertura e Fechamento dos Modais
+// Controles dos Modais
 document.getElementById('openCartBtn')?.addEventListener('click', () => cartModal.removeAttribute('hidden'));
 document.getElementById('closeCartBtn')?.addEventListener('click', () => cartModal.setAttribute('hidden', 'true'));
 document.getElementById('closeCartOverlay')?.addEventListener('click', () => cartModal.setAttribute('hidden', 'true'));
@@ -169,7 +165,7 @@ document.getElementById('backToCartBtn')?.addEventListener('click', () => {
   cartModal.removeAttribute('hidden');
 });
 
-// Adicionar item ao carrinho
+// Adicionar Item ao Carrinho (Captura o evento nos botões com classe .add-to-cart-btn)
 document.querySelectorAll('.add-to-cart-btn').forEach(button => {
   button.addEventListener('click', (e) => {
     const btn = e.currentTarget;
@@ -183,7 +179,7 @@ document.querySelectorAll('.add-to-cart-btn').forEach(button => {
   });
 });
 
-// Atualiza a visualização do carrinho
+// Renderizar itens do carrinho
 function updateCartUI() {
   if (cartCount) cartCount.textContent = cart.length;
 
@@ -205,7 +201,7 @@ function updateCartUI() {
         <strong>${item.title}</strong>
         <span>R$ ${item.price.toFixed(2).replace('.', ',')}</span>
       </div>
-      <button class="cart-item__remove" onclick="removeFromCart(${index})">Remover</button>
+      <button type="button" class="cart-item__remove" onclick="removeFromCart(${index})">Remover</button>
     `;
     cartItemsContainer.appendChild(itemEl);
   });
@@ -218,9 +214,9 @@ window.removeFromCart = function(index) {
   updateCartUI();
 };
 
-// Gerador de Mensagens por IA (Simulado)
+// Gerador de Mensagem por IA
 const aiMessages = [
-  "Layla e Eduardo, que a vida a dois seja sempre repleta de fé, amor e muitas alegrias!",
+  "Layla e Geovane, que a vida a dois seja sempre repleta de fé, amor e muitas alegrias!",
   "Que felicidade celebrar esse momento com vocês! Que o lar de vocês seja abençoado e cheio de paz.",
   "Desejo toda a felicidade do mundo nessa nova caminhada! Que nunca falte amor e companheirismo.",
   "Um brinde ao amor de vocês! Que este seja apenas o começo da história mais linda das suas vidas."
@@ -232,7 +228,7 @@ document.getElementById('aiGenerateBtn')?.addEventListener('click', () => {
   if (msgInput) msgInput.value = randomMsg;
 });
 
-// Botão "Finalizar Compra" -> Abre Modal de Pagamento
+// Finalizar Compra
 document.getElementById('checkoutBtn')?.addEventListener('click', () => {
   if (cart.length === 0) {
     alert('Por favor, adicione ao menos um presente ao carrinho antes de continuar.');
@@ -249,7 +245,7 @@ document.getElementById('checkoutBtn')?.addEventListener('click', () => {
   paymentModal.removeAttribute('hidden');
 });
 
-// Pagar via Pix dentro do Modal
+// Pagamento via Pix no Modal
 document.getElementById('payPixModalBtn')?.addEventListener('click', () => {
   const pixKey = "19971706455";
   navigator.clipboard.writeText(pixKey);
