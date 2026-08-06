@@ -1,4 +1,4 @@
-# Site de Casamento
+# Site do meu Casamento
 
 Site estático (HTML + CSS + JS puro, sem frameworks) pronto para editar e publicar
 de graça no GitHub Pages.
