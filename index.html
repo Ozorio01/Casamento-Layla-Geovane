@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nosso Casamento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================= -->
+  <!-- MENU FIXO -->
+  <!-- ============================================= -->
+  <nav class="nav" id="nav">
+    <a href="#topo" class="nav__brand">N &amp; N</a>
+    <button class="nav__toggle" id="navToggle" aria-label="Abrir menu">☰</button>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#historia">Nossa história</a></li>
+      <li><a href="#cerimonia">Cerimônia</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#presenca">Confirmar presença</a></li>
+      <li><a href="#presentes">Presentes</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================================= -->
+  <!-- CAPA / HERO -->
+  <!-- ============================================= -->
+  <header class="hero" id="topo">
+    <div class="hero__sprig hero__sprig--left" aria-hidden="true"></div>
+    <div class="hero__sprig hero__sprig--right" aria-hidden="true"></div>
+
+    <p class="hero__eyebrow">Vamos nos casar</p>
+    <h1 class="hero__names">
+      <!-- TROQUE OS NOMES ABAIXO -->
+      <span>Noiva</span>
+      <span class="hero__amp">&amp;</span>
+      <span>Noivo</span>
+    </h1>
+    <div class="hero__rule" aria-hidden="true"></div>
+    <!-- TROQUE A DATA NO FORMATO AAAA-MM-DDTHH:MM:SS -->
+    <p class="hero__date" id="weddingDateLabel">00 de mês de 2028 · 16h00</p>
+
+    <div class="countdown" id="countdown" aria-label="Contagem regressiva para o casamento">
+      <div class="countdown__unit">
+        <span class="countdown__num" id="cd-dias">00</span>
+        <span class="countdown__label">dias</span>
+      </div>
+      <div class="countdown__unit">
+        <span class="countdown__num" id="cd-horas">00</span>
+        <span class="countdown__label">horas</span>
+      </div>
+      <div class="countdown__unit">
+        <span class="countdown__num" id="cd-min">00</span>
+        <span class="countdown__label">min</span>
+      </div>
+      <div class="countdown__unit">
+        <span class="countdown__num" id="cd-seg">00</span>
+        <span class="countdown__label">seg</span>
+      </div>
+    </div>
+
+    <a href="#presenca" class="hero__cta">Confirmar presença</a>
+  </header>
+
+  <!-- ============================================= -->
+  <!-- NOSSA HISTÓRIA -->
+  <!-- ============================================= -->
+  <section class="section section--ivory" id="historia">
+    <div class="section__inner">
+      <p class="section__eyebrow">O casal</p>
+      <h2 class="section__title">Nossa história</h2>
+
+      <div class="story">
+        <!--
+          FOTO: troque a imagem abaixo pela foto do casal.
+          Coloque o arquivo em img/casal.jpg (recomendado: 1200x1500px, retrato)
+        -->
+        <div class="story__photo">
+          <img src="img/casal.jpg" alt="Foto do casal" onerror="this.closest('.story__photo').classList.add('story__photo--empty')">
+          <span class="story__photo-hint">Troque por img/casal.jpg</span>
+        </div>
+
+        <div class="story__text">
+          <p>
+            Escreva aqui como vocês se conheceram, o que os trouxe até esse momento e
+            por que decidiram dizer sim. Duas ou três frases sinceras contam mais do
+            que um texto longo — os convidados vão ler isso antes de confirmar presença.
+          </p>
+          <p>
+            Pode aproveitar para contar uma curiosidade do casal, uma tradição da
+            cerimônia, ou simplesmente agradecer por terem vocês por perto nessa fase.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- CERIMÔNIA -->
+  <!-- ============================================= -->
+  <section class="section section--forest" id="cerimonia">
+    <div class="section__inner">
+      <p class="section__eyebrow section__eyebrow--light">Onde e quando</p>
+      <h2 class="section__title section__title--light">Cerimônia &amp; recepção</h2>
+
+      <div class="details">
+        <div class="details__card">
+          <span class="details__icon" aria-hidden="true">✦</span>
+          <h3>Data</h3>
+          <!-- TROQUE A DATA -->
+          <p>00 de mês de 2028</p>
+        </div>
+        <div class="details__card">
+          <span class="details__icon" aria-hidden="true">✦</span>
+          <h3>Horário</h3>
+          <!-- TROQUE O HORÁRIO -->
+          <p>16h00</p>
+        </div>
+        <div class="details__card">
+          <span class="details__icon" aria-hidden="true">✦</span>
+          <h3>Local</h3>
+          <!-- TROQUE O NOME E CIDADE DO LOCAL -->
+          <p>Nome do espaço<br>Cidade - UF</p>
+        </div>
+        <div class="details__card">
+          <span class="details__icon" aria-hidden="true">✦</span>
+          <h3>Traje</h3>
+          <!-- TROQUE O TRAJE, SE QUISER -->
+          <p>Esporte fino</p>
+        </div>
+      </div>
+
+      <!--
+        MAPA: troque o "src" abaixo pelo endereço real.
+        No Google Maps: busque o local → Compartilhar → Incorporar um mapa → copie o link do "src".
+      -->
+      <div class="map">
+        <iframe
+          title="Mapa do local da cerimônia"
+          src="https://www.google.com/maps?q=Nova+Odessa,+SP&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- GALERIA DE FOTOS -->
+  <!-- ============================================= -->
+  <section class="section section--ivory" id="galeria">
+    <div class="section__inner">
+      <p class="section__eyebrow">Momentos</p>
+      <h2 class="section__title">Galeria</h2>
+      <p class="section__lead">
+        Troque cada bloco abaixo pelas suas fotos. Coloque os arquivos na pasta
+        <code>img/</code> e ajuste o <code>src</code> de cada <code>&lt;img&gt;</code> no HTML.
+      </p>
+
+      <!--
+        GALERIA: cada <figure> é uma foto.
+        Para adicionar mais fotos, copie um bloco <figure>...</figure> inteiro.
+      -->
+      <div class="gallery">
+        <figure class="gallery__item">
+          <img src="img/foto1.jpg" alt="Foto 1 do casal" onerror="this.closest('.gallery__item').classList.add('gallery__item--empty')">
+        </figure>
+        <figure class="gallery__item">
+          <img src="img/foto2.jpg" alt="Foto 2 do casal" onerror="this.closest('.gallery__item').classList.add('gallery__item--empty')">
+        </figure>
+        <figure class="gallery__item">
+          <img src="img/foto3.jpg" alt="Foto 3 do casal" onerror="this.closest('.gallery__item').classList.add('gallery__item--empty')">
+        </figure>
+        <figure class="gallery__item">
+          <img src="img/foto4.jpg" alt="Foto 4 do casal" onerror="this.closest('.gallery__item').classList.add('gallery__item--empty')">
+        </figure>
+        <figure class="gallery__item">
+          <img src="img/foto5.jpg" alt="Foto 5 do casal" onerror="this.closest('.gallery__item').classList.add('gallery__item--empty')">
+        </figure>
+        <figure class="gallery__item">
+          <img src="img/foto6.jpg" alt="Foto 6 do casal" onerror="this.closest('.gallery__item').classList.add('gallery__item--empty')">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- CONFIRMAR PRESENÇA (RSVP) -->
+  <!-- ============================================= -->
+  <section class="section section--sage" id="presenca">
+    <div class="section__inner section__inner--narrow">
+      <p class="section__eyebrow">RSVP</p>
+      <h2 class="section__title">Confirme sua presença</h2>
+      <p class="section__lead">
+        Preencha os campos abaixo até <strong>[coloque a data limite]</strong>.
+        Isso nos ajuda demais na organização do buffet e dos lugares.
+      </p>
+
+      <!--
+        FORMULÁRIO: por padrão isso só mostra uma mensagem de confirmação na tela
+        (não envia para lugar nenhum). Veja o README.md para 2 formas simples de
+        receber essas respostas de verdade: Google Forms ou Formspree.
+      -->
+      <form class="rsvp" id="rsvpForm">
+        <div class="rsvp__row">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" required placeholder="Seu nome">
+        </div>
+
+        <div class="rsvp__row">
+          <label for="acompanhantes">Quantas pessoas (incluindo você)</label>
+          <select id="acompanhantes" name="acompanhantes">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+
+        <div class="rsvp__row">
+          <label for="presenca-select">Você vai?</label>
+          <select id="presenca-select" name="presenca">
+            <option value="sim">Sim, estarei lá!</option>
+            <option value="nao">Não vou conseguir ir</option>
+          </select>
+        </div>
+
+        <div class="rsvp__row">
+          <label for="mensagem">Recado para o casal (opcional)</label>
+          <textarea id="mensagem" name="mensagem" rows="3" placeholder="Deixe uma mensagem carinhosa"></textarea>
+        </div>
+
+        <button type="submit" class="rsvp__submit">Enviar confirmação</button>
+      </form>
+
+      <p class="rsvp__success" id="rsvpSuccess" role="status" hidden>
+        Obrigado! Sua presença foi registrada nesta página. ✦
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- PRESENTES / PIX -->
+  <!-- ============================================= -->
+  <section class="section section--ivory" id="presentes">
+    <div class="section__inner section__inner--narrow">
+      <p class="section__eyebrow">Presentes</p>
+      <h2 class="section__title">Lista de presentes</h2>
+      <p class="section__lead">
+        Sua presença já é o nosso maior presente. Mas, se quiser nos ajudar a
+        começar essa nova fase, deixamos uma chave Pix disponível.
+      </p>
+
+      <div class="pix">
+        <p class="pix__label">Chave Pix</p>
+        <!-- TROQUE PELA SUA CHAVE PIX -->
+        <p class="pix__key" id="pixKey">seuemail@exemplo.com</p>
+        <button class="pix__copy" id="pixCopyBtn">Copiar chave</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- RODAPÉ -->
+  <!-- ============================================= -->
+  <footer class="footer">
+    <div class="footer__sprig" aria-hidden="true"></div>
+    <p>Com carinho, Noiva &amp; Noivo</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
