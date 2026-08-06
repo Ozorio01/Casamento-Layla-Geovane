@@ -26,7 +26,7 @@
   --body: "Work Sans", sans-serif;
   --mono: "Space Mono", monospace;
 
-  --radius: 2px;
+  --radius: 4px;
   --max-width: 1080px;
 }
 
@@ -96,7 +96,6 @@ a { color: inherit; }
   padding: 0;
 }
 
-/* AJUSTE: Cor alterada para branco puro e peso aumentado para melhor leitura */
 .nav__links a {
   text-decoration: none;
   color: var(--white);
@@ -157,7 +156,6 @@ a { color: inherit; }
 .hero__sprig--left { top: -40px; left: -60px; transform: rotate(-8deg); }
 .hero__sprig--right { bottom: -40px; right: -60px; transform: rotate(174deg); }
 
-/* AJUSTE: Mudar de var(--gold-deep) para var(--ink-blue) garante leitura perfeita no azul claro */
 .hero__eyebrow {
   font-family: var(--mono);
   font-size: 0.8rem;
@@ -236,7 +234,6 @@ a { color: inherit; }
   margin-top: 6px;
 }
 
-/* AJUSTE: Botão com tom Ouro/Bronze para destacar e contrastar fortemente */
 .hero__cta {
   display: inline-block;
   padding: 14px 34px;
@@ -524,79 +521,132 @@ a { color: inherit; }
 }
 
 /* =================================================================
-   ESTILOS DA LISTA DE PRESENTES
+   ESTILOS DA LISTA DE PRESENTES (APRIMORADOS)
    ================================================================= */
 .gifts__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 28px;
   margin-top: 40px;
 }
 
 .gift__card {
   background: var(--white);
   border: 1px solid var(--sage-line);
-  padding: 32px 24px;
+  padding: 28px 24px;
   border-radius: var(--radius);
-  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .gift__card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.09);
 }
 
 .gift__card--custom {
   background: var(--sage);
+  border-color: var(--sage-line);
+}
+
+.gift__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
 }
 
 .gift__icon {
   font-size: 2.2rem;
-  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.gift__badge {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(150, 168, 200, 0.25);
+  color: var(--ink-blue);
+}
+
+.gift__badge--highlight {
+  background: var(--gold);
+  color: var(--white);
+}
+
+.gift__body {
+  flex-grow: 1;
+  margin-bottom: 20px;
 }
 
 .gift__title {
   font-family: var(--display);
   font-size: 1.25rem;
   color: var(--ink-blue);
-  margin: 0 0 8px;
+  margin: 0 0 10px;
+  font-weight: 600;
 }
 
 .gift__desc {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: var(--ink-soft);
-  margin: 0 0 16px;
-  line-height: 1.4;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.gift__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-top: 1px solid rgba(82, 107, 142, 0.15);
+  padding-top: 18px;
+}
+
+.gift__price-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gift__price-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
 }
 
 .gift__price {
   font-family: var(--mono);
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--gold-deep);
-  margin-bottom: 20px;
 }
 
 .gift__btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
   padding: 12px 18px;
   background: var(--ink-blue);
   color: var(--white);
   text-decoration: none;
   font-family: var(--mono);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   border-radius: var(--radius);
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
 .gift__btn:hover {
@@ -604,34 +654,69 @@ a { color: inherit; }
   color: var(--white);
 }
 
+.gift__btn:active {
+  transform: translateY(1px);
+}
+
+/* Estilos de Pix */
+.gift__footer--pix {
+  gap: 14px;
+}
+
+.pix__box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--white);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  border: 1px dashed var(--sage-line);
+}
+
+.pix__label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+
 .pix__key {
   font-family: var(--mono);
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--ink-blue);
   font-weight: 700;
-  margin: 0 0 16px;
   word-break: break-all;
+  background: transparent;
 }
 
 .pix__copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
   padding: 12px 18px;
   background: transparent;
   border: 1px solid var(--ink-blue);
   color: var(--ink-blue);
   font-family: var(--mono);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
   border-radius: var(--radius);
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
 }
 
 .pix__copy:hover {
   background: var(--ink-blue);
   color: var(--white);
+}
+
+.pix__copy:active {
+  transform: translateY(1px);
 }
 
 /* =================================================================
