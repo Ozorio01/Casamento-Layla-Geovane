@@ -1,13 +1,9 @@
 // =====================================================================
-// TROQUE AQUI A DATA E HORA DO CASAMENTO
-// Formato: 'AAAA-MM-DDTHH:MM:SS'  (ano-mês-dia T hora:minuto:segundo)
-// Exemplo para 12 de agosto de 2028 às 16h30:  '2028-08-12T16:30:00'
+// DATA E HORA DO CASAMENTO
 // =====================================================================
 const WEDDING_DATE = '2028-09-30T16:30:00';
 
-// -------------------------------------------------------------------
-// Menu mobile
-// -------------------------------------------------------------------
+// Menu Mobile
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
 
@@ -23,9 +19,7 @@ navLinks?.querySelectorAll('a').forEach((link) => {
   });
 });
 
-// -------------------------------------------------------------------
-// Contagem regressiva
-// -------------------------------------------------------------------
+// Contagem Regressiva
 function updateCountdown() {
   const target = new Date(WEDDING_DATE).getTime();
   const now = Date.now();
@@ -62,11 +56,7 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// -------------------------------------------------------------------
-// Data legível no topo (opcional: gerada a partir de WEDDING_DATE)
-// Se preferir escrever a data manualmente, edite direto o texto no
-// HTML (id="weddingDateLabel") e apague este bloco.
-// -------------------------------------------------------------------
+// Data formatada no topo
 const dateLabel = document.getElementById('weddingDateLabel');
 if (dateLabel) {
   const d = new Date(WEDDING_DATE);
@@ -81,32 +71,17 @@ if (dateLabel) {
   }
 }
 
-// -------------------------------------------------------------------
-// RSVP — por padrão só mostra confirmação na tela.
-// Para receber de verdade, veja o README.md (Google Forms ou Formspree)
-// e troque o bloco abaixo pelo envio real.
-// -------------------------------------------------------------------
+// RSVP
 const rsvpForm = document.getElementById('rsvpForm');
 const rsvpSuccess = document.getElementById('rsvpSuccess');
 
 rsvpForm?.addEventListener('submit', (event) => {
   event.preventDefault();
-
-  // Exemplo de como pegar os dados, caso queira enviar para um serviço:
-  // const data = new FormData(rsvpForm);
-  // fetch('https://formspree.io/f/SEU_ID', { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-
   rsvpForm.hidden = true;
   rsvpSuccess.hidden = false;
 });
 
-// -------------------------------------------------------------------
-// Copiar chave Pix
-// Correção: antes o código sobrescrevia o textContent do botão inteiro,
-// o que apagava o ícone SVG na primeira vez que era clicado. Agora o
-// texto é trocado só dentro do <span class="pix__copy-label">, e um
-// status separado (com aria-live) avisa leitores de tela.
-// -------------------------------------------------------------------
+// Copiar Chave Pix Simples
 const pixCopyBtn = document.getElementById('pixCopyBtn');
 const pixKey = document.getElementById('pixKey');
 const pixCopyLabel = pixCopyBtn?.querySelector('.pix__copy-label');
@@ -114,7 +89,6 @@ const pixCopyStatus = document.getElementById('pixCopyStatus');
 
 pixCopyBtn?.addEventListener('click', async () => {
   const key = pixKey.textContent.trim();
-
   try {
     await navigator.clipboard.writeText(key);
     setCopiedState(true);
@@ -129,10 +103,10 @@ function setCopiedState(success, manualFallback = false) {
   if (success) {
     pixCopyBtn.classList.add('is-copied');
     pixCopyLabel.textContent = 'Chave copiada!';
-    if (pixCopyStatus) pixCopyStatus.textContent = 'Chave Pix copiada para a área de transferência.';
+    if (pixCopyStatus) pixCopyStatus.textContent = 'Chave Pix copiada com sucesso!';
   } else if (manualFallback) {
     if (pixCopyStatus) {
-      pixCopyStatus.textContent = `Não foi possível copiar automaticamente. Chave: ${pixKey.textContent.trim()}`;
+      pixCopyStatus.textContent = `Copie manualmente: ${pixKey.textContent.trim()}`;
     }
     return;
   }
@@ -144,9 +118,7 @@ function setCopiedState(success, manualFallback = false) {
   }, 2200);
 }
 
-// -------------------------------------------------------------------
-// Filtro de presentes por categoria
-// -------------------------------------------------------------------
+// Filtro de Categorias
 const giftFilters = document.getElementById('giftFilters');
 const giftCards = document.querySelectorAll('.gift__card');
 
@@ -167,4 +139,116 @@ giftFilters?.addEventListener('click', (event) => {
     const matches = filter === 'todos' || card.dataset.category === filter;
     card.classList.toggle('gift__card--hidden', !matches);
   });
+});
+
+// =====================================================================
+// SISTEMA DE CARRINHO E CHECKOUT
+// =====================================================================
+let cart = [];
+
+const cartModal = document.getElementById('cartModal');
+const paymentModal = document.getElementById('paymentModal');
+const cartCount = document.getElementById('cartCount');
+const cartItemsContainer = document.getElementById('cartItemsContainer');
+const cartTotalValue = document.getElementById('cartTotalValue');
+
+// Controles dos Modais
+document.getElementById('openCartBtn')?.addEventListener('click', () => cartModal.removeAttribute('hidden'));
+document.getElementById('closeCartBtn')?.addEventListener('click', () => cartModal.setAttribute('hidden', 'true'));
+document.getElementById('closeCartOverlay')?.addEventListener('click', () => cartModal.setAttribute('hidden', 'true'));
+document.getElementById('keepShoppingBtn')?.addEventListener('click', () => cartModal.setAttribute('hidden', 'true'));
+
+document.getElementById('closePaymentBtn')?.addEventListener('click', () => paymentModal.setAttribute('hidden', 'true'));
+document.getElementById('closePaymentOverlay')?.addEventListener('click', () => paymentModal.setAttribute('hidden', 'true'));
+document.getElementById('backToCartBtn')?.addEventListener('click', () => {
+  paymentModal.setAttribute('hidden', 'true');
+  cartModal.removeAttribute('hidden');
+});
+
+// Adicionar Item ao Carrinho (Captura o evento nos botões com classe .add-to-cart-btn)
+document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+  button.addEventListener('click', (e) => {
+    const btn = e.currentTarget;
+    const id = btn.getAttribute('data-id');
+    const title = btn.getAttribute('data-title');
+    const price = parseFloat(btn.getAttribute('data-price'));
+
+    cart.push({ id, title, price });
+    updateCartUI();
+    cartModal.removeAttribute('hidden');
+  });
+});
+
+// Renderizar itens do carrinho
+function updateCartUI() {
+  if (cartCount) cartCount.textContent = cart.length;
+
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = '<p class="cart-empty-msg">Seu carrinho está vazio.</p>';
+    cartTotalValue.textContent = 'R$ 0,00';
+    return;
+  }
+
+  cartItemsContainer.innerHTML = '';
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price;
+    const itemEl = document.createElement('div');
+    itemEl.className = 'cart-item';
+    itemEl.innerHTML = `
+      <div class="cart-item__info">
+        <strong>${item.title}</strong>
+        <span>R$ ${item.price.toFixed(2).replace('.', ',')}</span>
+      </div>
+      <button type="button" class="cart-item__remove" onclick="removeFromCart(${index})">Remover</button>
+    `;
+    cartItemsContainer.appendChild(itemEl);
+  });
+
+  cartTotalValue.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+}
+
+window.removeFromCart = function(index) {
+  cart.splice(index, 1);
+  updateCartUI();
+};
+
+// Gerador de Mensagem por IA
+const aiMessages = [
+  "Layla e Geovane, que a vida a dois seja sempre repleta de fé, amor e muitas alegrias!",
+  "Que felicidade celebrar esse momento com vocês! Que o lar de vocês seja abençoado e cheio de paz.",
+  "Desejo toda a felicidade do mundo nessa nova caminhada! Que nunca falte amor e companheirismo.",
+  "Um brinde ao amor de vocês! Que este seja apenas o começo da história mais linda das suas vidas."
+];
+
+document.getElementById('aiGenerateBtn')?.addEventListener('click', () => {
+  const randomMsg = aiMessages[Math.floor(Math.random() * aiMessages.length)];
+  const msgInput = document.getElementById('guestMessage');
+  if (msgInput) msgInput.value = randomMsg;
+});
+
+// Finalizar Compra
+document.getElementById('checkoutBtn')?.addEventListener('click', () => {
+  if (cart.length === 0) {
+    alert('Por favor, adicione ao menos um presente ao carrinho antes de continuar.');
+    return;
+  }
+  const nameInput = document.getElementById('guestName');
+  if (!nameInput || !nameInput.value.trim()) {
+    alert('Por favor, insira o seu nome antes de prosseguir.');
+    nameInput.focus();
+    return;
+  }
+
+  cartModal.setAttribute('hidden', 'true');
+  paymentModal.removeAttribute('hidden');
+});
+
+// Pagamento via Pix no Modal
+document.getElementById('payPixModalBtn')?.addEventListener('click', () => {
+  const pixKey = "19971706455";
+  navigator.clipboard.writeText(pixKey);
+  alert(`Chave Pix (${pixKey}) copiada com sucesso! Transfira o valor do presente pelo aplicativo do seu banco.`);
+  paymentModal.setAttribute('hidden', 'true');
 });
