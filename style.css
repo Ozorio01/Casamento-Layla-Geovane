@@ -91,7 +91,7 @@ a { color: inherit; }
 .nav__links {
   list-style: none;
   display: flex;
-  gap: 28px;
+  gap: 22px;
   margin: 0;
   padding: 0;
 }
@@ -99,16 +99,17 @@ a { color: inherit; }
 .nav__links a {
   text-decoration: none;
   color: var(--white);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .nav__links a:hover { color: var(--gold); }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .nav__toggle { display: block; }
   .nav__links {
     position: absolute;
@@ -468,6 +469,8 @@ a { color: inherit; }
   font-weight: 600;
 }
 
+.section--forest .rsvp__row label { color: var(--ink-blue); }
+
 .rsvp input,
 .rsvp select,
 .rsvp textarea {
@@ -498,7 +501,12 @@ a { color: inherit; }
 }
 
 .rsvp__submit:hover { 
-  background: var(--forest-deep); 
+  background: var(--gold-deep); 
+}
+
+.rsvp__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .rsvp__success {
@@ -1034,6 +1042,185 @@ a { color: inherit; }
   cursor: pointer;
   text-decoration: underline;
   padding: 8px;
+}
+
+/* =================================================================
+   PADRINHOS & MADRINHAS
+   ================================================================= */
+.godparents {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.godparent {
+  text-align: center;
+}
+
+.godparent__photo {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--white);
+  border: 2px solid var(--sage-line);
+  margin: 0 auto 14px;
+  max-width: 140px;
+  position: relative;
+}
+
+.godparent__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.godparent__photo--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.godparent__photo--empty img { display: none; }
+.godparent__photo--empty::after {
+  content: "foto";
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--ink-soft);
+}
+
+.godparent__name {
+  font-family: var(--display);
+  font-size: 1rem;
+  color: var(--ink-blue);
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.godparent__role {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold-deep);
+}
+
+/* =================================================================
+   PROGRAMAÇÃO DO DIA (TIMELINE)
+   ================================================================= */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(15, 23, 42, 0.15);
+  margin-top: 24px;
+}
+
+.timeline__item {
+  background: var(--forest);
+  padding: 22px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.timeline__time {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+}
+
+.timeline__label {
+  font-family: var(--body);
+  font-size: 0.85rem;
+  color: var(--ink-blue);
+  font-weight: 500;
+}
+
+@media (max-width: 760px) {
+  .timeline { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* =================================================================
+   COMO CHEGAR
+   ================================================================= */
+.directions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.directions__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  background: var(--ink-blue);
+  color: var(--white);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius);
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.directions__btn:hover { background: var(--gold-deep); }
+.directions__btn:active { transform: translateY(1px); }
+
+.directions__btn--waze { background: var(--sage-line); }
+.directions__btn--waze:hover { background: var(--gold-deep); }
+
+/* =================================================================
+   FAQ
+   ================================================================= */
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.faq__item {
+  background: var(--white);
+  border: 1px solid var(--sage-line);
+  border-radius: var(--radius);
+  padding: 4px 20px;
+}
+
+.faq__item summary {
+  cursor: pointer;
+  padding: 16px 0;
+  font-family: var(--body);
+  font-weight: 600;
+  color: var(--ink-blue);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq__item summary::-webkit-details-marker { display: none; }
+
+.faq__item summary::after {
+  content: "+";
+  font-family: var(--mono);
+  font-size: 1.2rem;
+  color: var(--gold-deep);
+  margin-left: 12px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.faq__item[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq__item p {
+  margin: 0 0 18px;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.6;
 }
 
 /* =================================================================
