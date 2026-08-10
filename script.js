@@ -71,14 +71,40 @@ if (dateLabel) {
   }
 }
 
-// RSVP
+// =====================================================================
+// RSVP — agora envia de verdade via FormSubmit (sem precisar de backend)
+// Lembre-se de trocar o e-mail no atributo "action" do <form> no HTML,
+// e de clicar no link de confirmação que chega no seu e-mail na
+// primeira vez que alguém enviar o formulário.
+// =====================================================================
 const rsvpForm = document.getElementById('rsvpForm');
 const rsvpSuccess = document.getElementById('rsvpSuccess');
 
-rsvpForm?.addEventListener('submit', (event) => {
+rsvpForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
-  rsvpForm.hidden = true;
-  rsvpSuccess.hidden = false;
+
+  const submitBtn = rsvpForm.querySelector('.rsvp__submit');
+  const originalLabel = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando...';
+
+  try {
+    const formData = new FormData(rsvpForm);
+    const response = await fetch(rsvpForm.action, {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: formData
+    });
+
+    if (!response.ok) throw new Error('Falha no envio');
+
+    rsvpForm.hidden = true;
+    rsvpSuccess.hidden = false;
+  } catch (err) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalLabel;
+    alert('Não foi possível enviar sua confirmação agora. Tente novamente em instantes ou chame a gente direto pelo WhatsApp.');
+  }
 });
 
 // Copiar Chave Pix Simples
@@ -247,8 +273,8 @@ document.getElementById('checkoutBtn')?.addEventListener('click', () => {
 
 // Pagamento via Pix no Modal
 document.getElementById('payPixModalBtn')?.addEventListener('click', () => {
-  const pixKey = "19971706455";
-  navigator.clipboard.writeText(pixKey);
-  alert(`Chave Pix (${pixKey}) copiada com sucesso! Transfira o valor do presente pelo aplicativo do seu banco.`);
+  const pixKeyValue = "19971706455";
+  navigator.clipboard.writeText(pixKeyValue);
+  alert(`Chave Pix (${pixKeyValue}) copiada com sucesso! Transfira o valor do presente pelo aplicativo do seu banco.`);
   paymentModal.setAttribute('hidden', 'true');
 });
