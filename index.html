@@ -4,6 +4,26 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Nosso Casamento — Layla &amp; Geovane</title>
+
+<!-- ===================================================================
+     PREVIEW DO LINK (WhatsApp, Instagram, etc.)
+     Troque img/preview.jpg por uma foto do casal, tamanho ideal 1200x630px.
+     Troque também a URL abaixo se o endereço do site mudar.
+     =================================================================== -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Layla & Geovane — Vamos nos casar!">
+<meta property="og:description" content="30 de setembro de 2028 · Confirme sua presença e faça parte desse dia inesquecível com a gente.">
+<meta property="og:image" content="https://ozorio01.github.io/Casamento-Layla-Geovane/img/preview.jpg">
+<meta property="og:url" content="https://ozorio01.github.io/Casamento-Layla-Geovane/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Layla & Geovane — Vamos nos casar!">
+<meta name="twitter:description" content="30 de setembro de 2028 · Confirme sua presença e faça parte desse dia inesquecível com a gente.">
+<meta name="twitter:image" content="https://ozorio01.github.io/Casamento-Layla-Geovane/img/preview.jpg">
+<meta name="theme-color" content="#0F172A">
+
+<!-- Troque por um favicon próprio em img/favicon.png (32x32 ou 64x64) -->
+<link rel="icon" href="img/favicon.png" type="image/png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -18,8 +38,10 @@
     <button class="nav__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">☰</button>
     <ul class="nav__links" id="navLinks">
       <li><a href="#historia">Nossa história</a></li>
+      <li><a href="#padrinhos">Padrinhos</a></li>
       <li><a href="#cerimonia">Cerimônia</a></li>
       <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#faq">Dúvidas</a></li>
       <li><a href="#presenca">Confirmar presença</a></li>
       <li><a href="#presentes">Presentes</a></li>
     </ul>
@@ -92,6 +114,51 @@
   </section>
 
   <!-- ============================================= -->
+  <!-- PADRINHOS E MADRINHAS -->
+  <!-- Troque nomes e fotos (img/padrinho1.jpg etc). Adicione ou remova
+       cards de acordo com o número real de padrinhos/madrinhas. -->
+  <!-- ============================================= -->
+  <section class="section section--sage" id="padrinhos">
+    <div class="section__inner">
+      <p class="section__eyebrow">Ao nosso lado</p>
+      <h2 class="section__title">Padrinhos &amp; Madrinhas</h2>
+      <p class="section__lead">
+        Pessoas que caminharam com a gente e vão estar ao nosso lado no altar nesse dia tão especial.
+      </p>
+      <div class="godparents">
+        <div class="godparent">
+          <div class="godparent__photo">
+            <img src="img/padrinho1.jpg" alt="Foto do padrinho" onerror="this.closest('.godparent__photo').classList.add('godparent__photo--empty')">
+          </div>
+          <p class="godparent__name">Nome do Padrinho</p>
+          <span class="godparent__role">Padrinho</span>
+        </div>
+        <div class="godparent">
+          <div class="godparent__photo">
+            <img src="img/madrinha1.jpg" alt="Foto da madrinha" onerror="this.closest('.godparent__photo').classList.add('godparent__photo--empty')">
+          </div>
+          <p class="godparent__name">Nome da Madrinha</p>
+          <span class="godparent__role">Madrinha</span>
+        </div>
+        <div class="godparent">
+          <div class="godparent__photo">
+            <img src="img/padrinho2.jpg" alt="Foto do padrinho" onerror="this.closest('.godparent__photo').classList.add('godparent__photo--empty')">
+          </div>
+          <p class="godparent__name">Nome do Padrinho</p>
+          <span class="godparent__role">Padrinho</span>
+        </div>
+        <div class="godparent">
+          <div class="godparent__photo">
+            <img src="img/madrinha2.jpg" alt="Foto da madrinha" onerror="this.closest('.godparent__photo').classList.add('godparent__photo--empty')">
+          </div>
+          <p class="godparent__name">Nome da Madrinha</p>
+          <span class="godparent__role">Madrinha</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
   <!-- CERIMÔNIA -->
   <!-- ============================================= -->
   <section class="section section--forest" id="cerimonia">
@@ -120,6 +187,27 @@
           <p>Esporte fino</p>
         </div>
       </div>
+
+      <!-- Programação do dia — ajuste os horários conforme o roteiro real -->
+      <div class="timeline">
+        <div class="timeline__item">
+          <span class="timeline__time">17h00</span>
+          <span class="timeline__label">Cerimônia</span>
+        </div>
+        <div class="timeline__item">
+          <span class="timeline__time">18h00</span>
+          <span class="timeline__label">Coquetel de boas-vindas</span>
+        </div>
+        <div class="timeline__item">
+          <span class="timeline__time">19h30</span>
+          <span class="timeline__label">Jantar</span>
+        </div>
+        <div class="timeline__item">
+          <span class="timeline__time">21h00</span>
+          <span class="timeline__label">Festa &amp; pista de dança</span>
+        </div>
+      </div>
+
       <div class="map">
         <iframe
           title="Mapa do local da cerimônia - Rancho Verde Eventos"
@@ -127,6 +215,15 @@
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade">
         </iframe>
+      </div>
+
+      <div class="directions">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=-22.9384912,-47.1493284" target="_blank" rel="noopener noreferrer" class="directions__btn">
+          📍 Como chegar (Google Maps)
+        </a>
+        <a href="https://waze.com/ul?ll=-22.9384912,-47.1493284&navigate=yes" target="_blank" rel="noopener noreferrer" class="directions__btn directions__btn--waze">
+          🚗 Abrir no Waze
+        </a>
       </div>
     </div>
   </section>
@@ -162,16 +259,60 @@
   </section>
 
   <!-- ============================================= -->
+  <!-- PERGUNTAS FREQUENTES -->
+  <!-- ============================================= -->
+  <section class="section section--sage" id="faq">
+    <div class="section__inner section__inner--narrow">
+      <p class="section__eyebrow">Dúvidas comuns</p>
+      <h2 class="section__title">Perguntas Frequentes</h2>
+      <div class="faq">
+        <details class="faq__item">
+          <summary>Posso levar meu filho(a)?</summary>
+          <p>Para que todos aproveitem a festa com tranquilidade, a cerimônia será só para adultos. Agradecemos a compreensão! 💛</p>
+        </details>
+        <details class="faq__item">
+          <summary>Existe estacionamento no local?</summary>
+          <p>Sim, o Rancho Verde Eventos possui estacionamento próprio e gratuito para os convidados.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Até quando posso confirmar presença?</summary>
+          <p>Pedimos que a confirmação seja feita até <strong>30 de agosto de 2028</strong>, para nos ajudar na organização do buffet e dos lugares.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Vou receber um convite físico?</summary>
+          <p>Este site é o nosso convite oficial! Guarde o link para acompanhar todas as informações do grande dia.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Qual o traje ideal?</summary>
+          <p>O traje é esporte fino. Pedimos apenas para evitar branco e off-white, cor reservada para a noiva.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
   <!-- CONFIRMAR PRESENÇA (RSVP) -->
   <!-- ============================================= -->
-  <section class="section section--sage" id="presenca">
+  <section class="section section--forest" id="presenca">
     <div class="section__inner section__inner--narrow">
-      <p class="section__eyebrow">RSVP</p>
-      <h2 class="section__title">Confirme sua presença</h2>
-      <p class="section__lead">
+      <p class="section__eyebrow section__eyebrow--light">RSVP</p>
+      <h2 class="section__title section__title--light">Confirme sua presença</h2>
+      <p class="section__lead" style="color: var(--ink-blue); font-weight: 500;">
         Preencha os campos abaixo para confirmar sua presença. Isso nos ajuda na organização do buffet e dos lugares.
+        Pedimos a confirmação até <strong>30 de agosto de 2028</strong>.
       </p>
-      <form class="rsvp" id="rsvpForm">
+
+      <!-- =====================================================================
+           IMPORTANTE: troque "seuemail@exemplo.com" abaixo pelo seu e-mail real.
+           O FormSubmit vai mandar um e-mail de confirmação na primeira vez que
+           alguém enviar o formulário — clique no link desse e-mail para ativar
+           o recebimento das próximas confirmações. Não precisa criar conta.
+           ===================================================================== -->
+      <form class="rsvp" id="rsvpForm" action="https://formsubmit.co/ajax/seuemail@exemplo.com" method="POST">
+        <input type="hidden" name="_subject" value="Nova confirmação de presença — Casamento Layla &amp; Geovane">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
         <div class="rsvp__row">
           <label for="nome">Nome completo</label>
           <input type="text" id="nome" name="nome" required placeholder="Seu nome">
@@ -193,13 +334,17 @@
           </select>
         </div>
         <div class="rsvp__row">
+          <label for="musica">Sugestão de música para a festa (opcional)</label>
+          <input type="text" id="musica" name="musica" placeholder="Nome da música e artista">
+        </div>
+        <div class="rsvp__row">
           <label for="mensagem">Recado para o casal (opcional)</label>
           <textarea id="mensagem" name="mensagem" rows="3" placeholder="Deixe uma mensagem carinhosa"></textarea>
         </div>
         <button type="submit" class="rsvp__submit">Enviar confirmação</button>
       </form>
       <p class="rsvp__success" id="rsvpSuccess" role="status" hidden>
-        Obrigado! Sua presença foi registrada nesta página. ✦
+        Obrigado! Sua presença foi registrada. ✦
       </p>
     </div>
   </section>
