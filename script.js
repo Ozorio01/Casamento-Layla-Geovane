@@ -429,3 +429,39 @@ document.getElementById('payPixModalBtn')?.addEventListener('click', () => {
   alert(`Chave Pix (${pixKeyValue}) copiada com sucesso! Transfira o valor do presente pelo aplicativo do seu banco.`);
   closeModal(paymentModal);
 });
+
+// =====================================================================
+// EFEITO TILT 3D (MOUSE HOVER NAS FOTOS)
+// =====================================================================
+function initTiltEffect() {
+  // Ativa o efeito apenas em dispositivos com ponteiro preciso (mouse)
+  if (window.matchMedia('(pointer: fine)').matches) {
+    const tiltElements = document.querySelectorAll('[data-tilt]');
+
+    tiltElements.forEach((el) => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        // Ângulo máximo de inclinação em graus
+        const maxTilt = 12;
+        const rotateX = ((centerY - y) / centerY) * maxTilt;
+        const rotateY = ((x - centerX) / centerX) * maxTilt;
+
+        el.classList.add('is-tilting');
+        el.style.transform = `perspective(900px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+
+      el.addEventListener('mouseleave', () => {
+        el.classList.remove('is-tilting');
+        el.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      });
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initTiltEffect);
