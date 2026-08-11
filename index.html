@@ -50,41 +50,47 @@
     </ul>
   </nav>
 
-  <!-- ============================================= -->
+ <!-- ============================================= -->
   <!-- CAPA / HERO -->
   <!-- ============================================= -->
   <header class="hero" id="topo">
-    <p class="hero__eyebrow">Vamos nos casar</p>
-    <h1 class="hero__names">
-      <span>Layla</span>
-      <span class="hero__amp">&amp;</span>
-      <span>Geovane</span>
-    </h1>
-    <div class="hero__rule" aria-hidden="true"></div>
-    <p class="hero__date" id="weddingDateLabel">30 de setembro de 2028 · 17h00</p>
+    <div class="hero__bg"></div>
+    <div class="hero__overlay"></div>
+    <div class="hero__lights" aria-hidden="true"></div>
+    
+    <div class="hero__content">
+      <p class="hero__eyebrow">Vamos nos casar</p>
+      <h1 class="hero__names">
+        <span>Layla</span>
+        <span class="hero__amp">&amp;</span>
+        <span>Geovane</span>
+      </h1>
+      <div class="hero__rule" aria-hidden="true"></div>
+      <p class="hero__date" id="weddingDateLabel">30 de setembro de 2028 · 17h00</p>
 
-    <!-- Contagem regressiva. Quando a data chegar, some e mostra a mensagem "É hoje!" -->
-    <div class="countdown" id="countdown" aria-label="Contagem regressiva para o casamento">
-      <div class="countdown__unit">
-        <span class="countdown__num" id="cd-dias">00</span>
-        <span class="countdown__label">dias</span>
+      <!-- Contagem regressiva -->
+      <div class="countdown" id="countdown" aria-label="Contagem regressiva para o casamento">
+        <div class="countdown__unit">
+          <span class="countdown__num" id="cd-dias">00</span>
+          <span class="countdown__label">dias</span>
+        </div>
+        <div class="countdown__unit">
+          <span class="countdown__num" id="cd-horas">00</span>
+          <span class="countdown__label">horas</span>
+        </div>
+        <div class="countdown__unit">
+          <span class="countdown__num" id="cd-min">00</span>
+          <span class="countdown__label">min</span>
+        </div>
+        <div class="countdown__unit">
+          <span class="countdown__num" id="cd-seg">00</span>
+          <span class="countdown__label">seg</span>
+        </div>
       </div>
-      <div class="countdown__unit">
-        <span class="countdown__num" id="cd-horas">00</span>
-        <span class="countdown__label">horas</span>
-      </div>
-      <div class="countdown__unit">
-        <span class="countdown__num" id="cd-min">00</span>
-        <span class="countdown__label">min</span>
-      </div>
-      <div class="countdown__unit">
-        <span class="countdown__num" id="cd-seg">00</span>
-        <span class="countdown__label">seg</span>
-      </div>
+      <p class="countdown__today" id="countdownToday" hidden>É hoje! 🎉</p>
+
+      <a href="#presenca" class="hero__cta">Confirmar presença</a>
     </div>
-    <p class="countdown__today" id="countdownToday" hidden>É hoje! 🎉</p>
-
-    <a href="#presenca" class="hero__cta">Confirmar presença</a>
   </header>
 
   <!-- ============================================= -->
