@@ -132,23 +132,81 @@ a { color: inherit; }
   position: relative;
   min-height: 100svh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* Foto real do casal como capa. O gradiente escuro por cima garante que
-     o texto branco continue legível em qualquer parte da foto.
-     Troque img/casal-capa.jpg caso queira usar outra imagem. */
+  color: var(--white);
+  overflow: hidden;
+  isolation: isolate; /* garante que as camadas internas não vazem para fora do hero */
+}
+
+/* Camada 1: a foto do casal. Fica um pouco maior que o hero (inset negativo)
+   e mais alta que a viewport, para sobrar margem de movimento no parallax
+   sem revelar bordas vazias. Movida via transform no script.js. */
+.hero__bg {
+  position: absolute;
+  inset: -12% 0;
   background-color: var(--forest-deep); /* aparece rapidamente enquanto a foto carrega */
-  background-image:
-    linear-gradient(180deg, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.35) 45%, rgba(15, 23, 42, 0.75) 100%),
-    url('img/casal-capa.jpg');
+  background-image: url('img/casal-capa.jpg');
   background-size: cover;
   background-position: center 22%;
   background-repeat: no-repeat;
-  color: var(--white);
-  padding: 120px 24px 80px;
+  will-change: transform;
+  z-index: 0;
+}
+
+/* Camada 2: gradiente escuro para o texto branco continuar legível */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.35) 45%, rgba(15, 23, 42, 0.75) 100%);
+  z-index: 1;
+}
+
+/* Camada 3: luzinhas flutuantes — geradas via JS, ecoam o varal de luzes
+   da própria foto de capa. Puramente decorativo (aria-hidden). */
+.hero__lights {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
   overflow: hidden;
+}
+
+.hero__light {
+  position: absolute;
+  bottom: -10px;
+  width: var(--light-size, 6px);
+  height: var(--light-size, 6px);
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFE9B8 0%, var(--gold) 55%, transparent 75%);
+  box-shadow: 0 0 8px 2px rgba(255, 220, 150, 0.55);
+  opacity: 0;
+  animation: hero-light-float var(--light-duration, 14s) linear infinite;
+  animation-delay: var(--light-delay, 0s);
+}
+
+@keyframes hero-light-float {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  8% { opacity: var(--light-opacity, 0.85); }
+  50% { transform: translateY(-52svh) translateX(var(--light-drift, 12px)); }
+  92% { opacity: var(--light-opacity, 0.85); }
+  100% { transform: translateY(-104svh) translateX(0); opacity: 0; }
+}
+
+/* Camada 4: conteúdo (textos, contagem, botão) */
+.hero__content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 24px 80px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__bg { transform: none !important; }
+  .hero__light { display: none; }
 }
 
 .hero__eyebrow {
@@ -338,6 +396,27 @@ a { color: inherit; }
   border: 1px solid var(--sage-line);
   position: relative;
   overflow: hidden;
+}
+
+/* =================================================================
+   TILT 3D — aplicado via JS (data-tilt) a fotos com pointer preciso
+   (mouse). Em telas de toque o tilt não é ativado; a foto continua
+   normal, sem necessidade de permissões de giroscópio.
+   ================================================================= */
+[data-tilt] {
+  transform-style: preserve-3d;
+  perspective: 900px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+  will-change: transform;
+}
+
+[data-tilt].is-tilting {
+  transition: transform 0.08s linear;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-tilt] { transition: none; }
 }
 
 .story__photo img { width: 100%; height: 100%; object-fit: cover; }
