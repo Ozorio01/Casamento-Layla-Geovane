@@ -1,7 +1,12 @@
 // =====================================================================
 // DATA E HORA DO CASAMENTO
+// Corrigido: agora bate com o "17h00" mostrado no HTML (antes estava 16:30).
 // =====================================================================
-const WEDDING_DATE = '2028-09-30T16:30:00';
+const WEDDING_DATE = '2028-09-30T17:00:00';
+
+// E-mail que recebe as notificações do FormSubmit (RSVP e presentes).
+// Troque em UM lugar só se precisar mudar — os dois formulários usam esta constante.
+const NOTIFY_EMAIL = 'ozorio2305@gmail.com';
 
 // Menu Mobile
 const navToggle = document.getElementById('navToggle');
@@ -19,7 +24,14 @@ navLinks?.querySelectorAll('a').forEach((link) => {
   });
 });
 
-// Contagem Regressiva
+// =====================================================================
+// CONTAGEM REGRESSIVA
+// Quando a data chega, esconde os números e mostra "É hoje!" em vez de
+// ficar travado em 00:00:00:00.
+// =====================================================================
+const countdownEl = document.getElementById('countdown');
+const countdownToday = document.getElementById('countdownToday');
+
 function updateCountdown() {
   const target = new Date(WEDDING_DATE).getTime();
   const now = Date.now();
@@ -33,10 +45,8 @@ function updateCountdown() {
   if (!elDias) return;
 
   if (diff <= 0) {
-    elDias.textContent = '00';
-    elHoras.textContent = '00';
-    elMin.textContent = '00';
-    elSeg.textContent = '00';
+    if (countdownEl) countdownEl.hidden = true;
+    if (countdownToday) countdownToday.hidden = false;
     return;
   }
 
@@ -72,9 +82,8 @@ if (dateLabel) {
 }
 
 // =====================================================================
-// RSVP — agora envia de verdade via FormSubmit (sem precisar de backend)
-// Lembre-se de trocar o e-mail no atributo "action" do <form> no HTML,
-// e de clicar no link de confirmação que chega no seu e-mail na
+// RSVP — envia via FormSubmit (sem precisar de backend)
+// Lembre-se de clicar no link de confirmação que chega no seu e-mail na
 // primeira vez que alguém enviar o formulário.
 // =====================================================================
 const rsvpForm = document.getElementById('rsvpForm');
@@ -107,14 +116,16 @@ rsvpForm?.addEventListener('submit', async (event) => {
   }
 });
 
-// Copiar Chave Pix Simples
+// =====================================================================
+// COPIAR CHAVE PIX (card "Livre Escolha")
+// =====================================================================
 const pixCopyBtn = document.getElementById('pixCopyBtn');
-const pixKey = document.getElementById('pixKey');
+const pixKeyEl = document.getElementById('pixKey');
 const pixCopyLabel = pixCopyBtn?.querySelector('.pix__copy-label');
 const pixCopyStatus = document.getElementById('pixCopyStatus');
 
 pixCopyBtn?.addEventListener('click', async () => {
-  const key = pixKey.textContent.trim();
+  const key = pixKeyEl.textContent.trim();
   try {
     await navigator.clipboard.writeText(key);
     setCopiedState(true);
@@ -132,7 +143,7 @@ function setCopiedState(success, manualFallback = false) {
     if (pixCopyStatus) pixCopyStatus.textContent = 'Chave Pix copiada com sucesso!';
   } else if (manualFallback) {
     if (pixCopyStatus) {
-      pixCopyStatus.textContent = `Copie manualmente: ${pixKey.textContent.trim()}`;
+      pixCopyStatus.textContent = `Copie manualmente: ${pixKeyEl.textContent.trim()}`;
     }
     return;
   }
@@ -170,7 +181,29 @@ giftFilters?.addEventListener('click', (event) => {
 // =====================================================================
 // SISTEMA DE CARRINHO E CHECKOUT
 // =====================================================================
-let cart = [];
+const CART_STORAGE_KEY = 'casamento-layla-geovane-cart';
+
+function loadCart() {
+  try {
+    const saved = localStorage.getItem(CART_STORAGE_KEY);
+    const parsed = saved ? JSON.parse(saved) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (err) {
+    return [];
+  }
+}
+
+function saveCart() {
+  try {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  } catch (err) {
+    // localStorage indisponível (modo privado, navegador antigo, etc.)
+    // O carrinho continua funcionando nesta sessão, só não persiste.
+  }
+}
+
+// Carrinho carregado do localStorage, se já houver algo salvo de uma visita anterior.
+let cart = loadCart();
 
 const cartModal = document.getElementById('cartModal');
 const paymentModal = document.getElementById('paymentModal');
@@ -178,17 +211,63 @@ const cartCount = document.getElementById('cartCount');
 const cartItemsContainer = document.getElementById('cartItemsContainer');
 const cartTotalValue = document.getElementById('cartTotalValue');
 
-// Controles dos Modais
-document.getElementById('openCartBtn')?.addEventListener('click', () => cartModal.removeAttribute('hidden'));
-document.getElementById('closeCartBtn')?.addEventListener('click', () => cartModal.setAttribute('hidden', 'true'));
-document.getElementById('closeCartOverlay')?.addEventListener('click', () => cartModal.setAttribute('hidden', 'true'));
-document.getElementById('keepShoppingBtn')?.addEventListener('click', () => cartModal.setAttribute('hidden', 'true'));
+// ---------------------------------------------------------------------
+// Acessibilidade dos modais: Esc fecha, Tab fica preso dentro do modal.
+// ---------------------------------------------------------------------
+function getFocusable(container) {
+  return Array.from(
+    container.querySelectorAll('a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])')
+  ).filter((el) => el.offsetParent !== null);
+}
 
-document.getElementById('closePaymentBtn')?.addEventListener('click', () => paymentModal.setAttribute('hidden', 'true'));
-document.getElementById('closePaymentOverlay')?.addEventListener('click', () => paymentModal.setAttribute('hidden', 'true'));
+function openModal(modal) {
+  modal.removeAttribute('hidden');
+  const focusable = getFocusable(modal.querySelector('[role="dialog"]') || modal);
+  if (focusable.length) focusable[0].focus();
+}
+
+function closeModal(modal) {
+  modal.setAttribute('hidden', 'true');
+}
+
+function setupModalA11y(modalEl, contentSelector, closeFn) {
+  const content = modalEl.querySelector(contentSelector);
+  modalEl.addEventListener('keydown', (event) => {
+    if (modalEl.hasAttribute('hidden')) return;
+    if (event.key === 'Escape') {
+      closeFn();
+      return;
+    }
+    if (event.key === 'Tab' && content) {
+      const focusable = getFocusable(content);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+}
+
+setupModalA11y(cartModal, '.cart-modal__content', () => closeModal(cartModal));
+setupModalA11y(paymentModal, '.payment-modal__content', () => closeModal(paymentModal));
+
+// Controles dos Modais
+document.getElementById('openCartBtn')?.addEventListener('click', () => openModal(cartModal));
+document.getElementById('closeCartBtn')?.addEventListener('click', () => closeModal(cartModal));
+document.getElementById('closeCartOverlay')?.addEventListener('click', () => closeModal(cartModal));
+document.getElementById('keepShoppingBtn')?.addEventListener('click', () => closeModal(cartModal));
+
+document.getElementById('closePaymentBtn')?.addEventListener('click', () => closeModal(paymentModal));
+document.getElementById('closePaymentOverlay')?.addEventListener('click', () => closeModal(paymentModal));
 document.getElementById('backToCartBtn')?.addEventListener('click', () => {
-  paymentModal.setAttribute('hidden', 'true');
-  cartModal.removeAttribute('hidden');
+  closeModal(paymentModal);
+  openModal(cartModal);
 });
 
 // Adicionar Item ao Carrinho (Captura o evento nos botões com classe .add-to-cart-btn)
@@ -201,12 +280,14 @@ document.querySelectorAll('.add-to-cart-btn').forEach(button => {
 
     cart.push({ id, title, price });
     updateCartUI();
-    cartModal.removeAttribute('hidden');
+    openModal(cartModal);
   });
 });
 
 // Renderizar itens do carrinho
 function updateCartUI() {
+  saveCart();
+
   if (cartCount) cartCount.textContent = cart.length;
 
   if (cart.length === 0) {
@@ -235,6 +316,9 @@ function updateCartUI() {
   cartTotalValue.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
 }
 
+// Preenche o carrinho salvo assim que a página carrega.
+updateCartUI();
+
 window.removeFromCart = function(index) {
   cart.splice(index, 1);
   updateCartUI();
@@ -254,8 +338,17 @@ document.getElementById('aiGenerateBtn')?.addEventListener('click', () => {
   if (msgInput) msgInput.value = randomMsg;
 });
 
-// Finalizar Compra
-document.getElementById('checkoutBtn')?.addEventListener('click', () => {
+// =====================================================================
+// FINALIZAR COMPRA
+// Antes: só abria a tela de pagamento e os dados do convidado (nome,
+// presentes escolhidos, mensagem) se perdiam. Agora envia tudo via
+// FormSubmit para o mesmo e-mail do RSVP, para vocês saberem quem
+// presenteou e com o quê.
+// =====================================================================
+const checkoutBtn = document.getElementById('checkoutBtn');
+const GIFT_NOTIFY_ENDPOINT = `https://formsubmit.co/ajax/${NOTIFY_EMAIL}`;
+
+checkoutBtn?.addEventListener('click', async () => {
   if (cart.length === 0) {
     alert('Por favor, adicione ao menos um presente ao carrinho antes de continuar.');
     return;
@@ -267,14 +360,48 @@ document.getElementById('checkoutBtn')?.addEventListener('click', () => {
     return;
   }
 
-  cartModal.setAttribute('hidden', 'true');
-  paymentModal.removeAttribute('hidden');
+  const originalLabel = checkoutBtn.textContent;
+  checkoutBtn.disabled = true;
+  checkoutBtn.textContent = 'Registrando...';
+
+  const messageInput = document.getElementById('guestMessage');
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  const itemsList = cart.map((item) => `${item.title} (R$ ${item.price.toFixed(2).replace('.', ',')})`).join(' | ');
+
+  const payload = {
+    _subject: 'Novo presente escolhido — Casamento Layla & Geovane',
+    _template: 'table',
+    nome: nameInput.value.trim(),
+    presentes_escolhidos: itemsList,
+    total: `R$ ${total.toFixed(2).replace('.', ',')}`,
+    mensagem: messageInput?.value.trim() || '(sem mensagem)'
+  };
+
+  try {
+    const response = await fetch(GIFT_NOTIFY_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!response.ok) throw new Error('Falha no envio');
+  } catch (err) {
+    // Mesmo se a notificação falhar, deixamos o convidado seguir para o
+    // pagamento — só avisamos para ele confirmar com vocês por outro canal.
+    alert('Não foi possível registrar seu presente automaticamente. Você ainda pode pagar normalmente, mas por favor nos avise pelo WhatsApp para garantirmos o registro.');
+  } finally {
+    checkoutBtn.disabled = false;
+    checkoutBtn.textContent = originalLabel;
+  }
+
+  closeModal(cartModal);
+  openModal(paymentModal);
 });
 
-// Pagamento via Pix no Modal
+// Pagamento via Pix no Modal — lê a chave direto do DOM em vez de
+// repetir o número aqui (evita os dois lugares ficarem dessincronizados).
 document.getElementById('payPixModalBtn')?.addEventListener('click', () => {
-  const pixKeyValue = "19971706455";
+  const pixKeyValue = pixKeyEl.textContent.trim();
   navigator.clipboard.writeText(pixKeyValue);
   alert(`Chave Pix (${pixKeyValue}) copiada com sucesso! Transfira o valor do presente pelo aplicativo do seu banco.`);
-  paymentModal.setAttribute('hidden', 'true');
+  closeModal(paymentModal);
 });
