@@ -8,6 +8,12 @@ const WEDDING_DATE = '2028-09-30T17:00:00';
 // Troque em UM lugar só se precisar mudar — os dois formulários usam esta constante.
 const NOTIFY_EMAIL = 'ozorio2305@gmail.com';
 
+// URL do Web App do Google Apps Script (termina em /exec) — é para onde
+// cada confirmação de presença é enviada para virar uma linha na sua
+// Planilha Google. Troque pelo link que você copiou ao implantar o script.
+// Enquanto estiver com o texto abaixo, o site simplesmente pula esse envio
+// e continua funcionando normalmente só com o e-mail do FormSubmit.
+const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxLACLiClaOYSZDQ17zracKUI7_DxmOD_lQrW7rRANog569Nxxj46qIcmdD67_sq1tcbg/exec';
 // Menu Mobile
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
@@ -82,7 +88,8 @@ if (dateLabel) {
 }
 
 // =====================================================================
-// RSVP — envia via FormSubmit (sem precisar de backend)
+// RSVP — envia via FormSubmit (e-mail) e, se configurado, também
+// registra automaticamente numa linha da sua Planilha Google.
 // Lembre-se de clicar no link de confirmação que chega no seu e-mail na
 // primeira vez que alguém enviar o formulário.
 // =====================================================================
@@ -96,6 +103,23 @@ rsvpForm?.addEventListener('submit', async (event) => {
   const originalLabel = submitBtn.textContent;
   submitBtn.disabled = true;
   submitBtn.textContent = 'Enviando...';
+
+  const formData = new FormData(rsvpForm);
+
+  // Envia para a Planilha Google em paralelo, sem travar o restante do
+  // fluxo — se ela falhar (ou não estiver configurada ainda), o RSVP
+  // por e-mail abaixo continua funcionando normalmente.
+  if (SHEET_ENDPOINT && !SHEET_ENDPOINT.includes('COLE_AQUI')) {
+    const sheetPayload = Object.fromEntries(formData.entries());
+    fetch(SHEET_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(sheetPayload)
+    }).catch(() => {
+      // Falha silenciosa: o registro na planilha é um "extra", o e-mail
+      // do FormSubmit abaixo é quem garante que vocês fiquem sabendo.
+    });
+  }
 
   try {
     const formData = new FormData(rsvpForm);
