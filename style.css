@@ -136,35 +136,30 @@ a { color: inherit; }
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: radial-gradient(120% 90% at 50% 0%, #BCCDE8 0%, var(--forest) 55%, var(--forest-deep) 100%);
-  color: var(--ink-blue);
+  /* Foto real do casal como capa. O gradiente escuro por cima garante que
+     o texto branco continue legível em qualquer parte da foto.
+     Troque img/casal-capa.jpg caso queira usar outra imagem. */
+  background-color: var(--forest-deep); /* aparece rapidamente enquanto a foto carrega */
+  background-image:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.35) 45%, rgba(15, 23, 42, 0.75) 100%),
+    url('img/casal-capa.jpg');
+  background-size: cover;
+  background-position: center 22%;
+  background-repeat: no-repeat;
+  color: var(--white);
   padding: 120px 24px 80px;
   overflow: hidden;
 }
-
-.hero__sprig {
-  position: absolute;
-  width: 220px;
-  height: 420px;
-  opacity: 0.25;
-  background:
-    linear-gradient(var(--sage-line), var(--sage-line)) center/2px 100% no-repeat,
-    radial-gradient(circle, var(--sage-line) 40%, transparent 41%) 30% 20%/26px 26px no-repeat,
-    radial-gradient(circle, var(--sage-line) 40%, transparent 41%) 70% 38%/22px 22px no-repeat,
-    radial-gradient(circle, var(--sage-line) 40%, transparent 41%) 25% 55%/24px 24px no-repeat,
-    radial-gradient(circle, var(--sage-line) 40%, transparent 41%) 68% 72%/20px 20px no-repeat;
-}
-.hero__sprig--left { top: -40px; left: -60px; transform: rotate(-8deg); }
-.hero__sprig--right { bottom: -40px; right: -60px; transform: rotate(174deg); }
 
 .hero__eyebrow {
   font-family: var(--mono);
   font-size: 0.8rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--ink-blue);
+  color: var(--white);
   font-weight: 700;
   margin: 0 0 18px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
 }
 
 .hero__names {
@@ -178,20 +173,21 @@ a { color: inherit; }
   gap: 0.35em;
   flex-wrap: wrap;
   justify-content: center;
-  color: var(--ink-blue);
+  color: var(--white);
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
 }
 
 .hero__amp {
   font-style: italic;
   font-weight: 300;
-  color: var(--gold-deep);
+  color: var(--gold);
   font-size: 0.7em;
 }
 
 .hero__rule {
   width: 64px;
   height: 2px;
-  background: var(--sage-line);
+  background: var(--gold);
   margin: 28px 0 20px;
 }
 
@@ -200,8 +196,9 @@ a { color: inherit; }
   font-size: 0.9rem;
   letter-spacing: 0.08em;
   font-weight: 600;
-  color: var(--ink-blue);
+  color: var(--white);
   margin: 0 0 44px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
 }
 
 .countdown {
@@ -221,8 +218,9 @@ a { color: inherit; }
   font-family: var(--mono);
   font-weight: 700;
   font-size: clamp(1.8rem, 5vw, 2.6rem);
-  color: var(--ink-blue);
+  color: var(--white);
   font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
 }
 
 .countdown__label {
@@ -230,9 +228,10 @@ a { color: inherit; }
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--ink-blue);
+  color: var(--white);
   font-weight: 700;
   margin-top: 6px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
 }
 
 /* Mensagem exibida quando a contagem regressiva chega a zero */
@@ -240,8 +239,9 @@ a { color: inherit; }
   font-family: var(--display);
   font-weight: 600;
   font-size: clamp(1.6rem, 5vw, 2.2rem);
-  color: var(--ink-blue);
+  color: var(--white);
   margin: 0 0 48px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
 }
 
 .hero__cta {
