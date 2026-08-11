@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Nosso Casamento — Layla &amp; Geovane</title>
 
+<!-- SEO básico -->
+<meta name="description" content="Layla & Geovane vão se casar em 30 de setembro de 2028. Confirme sua presença, veja detalhes da cerimônia e faça parte desse dia inesquecível.">
+
 <!-- ===================================================================
      PREVIEW DO LINK (WhatsApp, Instagram, etc.)
      Troque img/preview.jpg por uma foto do casal, tamanho ideal 1200x630px.
@@ -61,6 +64,8 @@
     </h1>
     <div class="hero__rule" aria-hidden="true"></div>
     <p class="hero__date" id="weddingDateLabel">30 de setembro de 2028 · 17h00</p>
+
+    <!-- Contagem regressiva. Quando a data chegar, some e mostra a mensagem "É hoje!" -->
     <div class="countdown" id="countdown" aria-label="Contagem regressiva para o casamento">
       <div class="countdown__unit">
         <span class="countdown__num" id="cd-dias">00</span>
@@ -79,6 +84,8 @@
         <span class="countdown__label">seg</span>
       </div>
     </div>
+    <p class="countdown__today" id="countdownToday" hidden>É hoje! 🎉</p>
+
     <a href="#presenca" class="hero__cta">Confirmar presença</a>
   </header>
 
@@ -316,6 +323,10 @@
         <div class="rsvp__row">
           <label for="nome">Nome completo</label>
           <input type="text" id="nome" name="nome" required placeholder="Seu nome">
+        </div>
+        <div class="rsvp__row">
+          <label for="contato">WhatsApp ou e-mail (opcional)</label>
+          <input type="text" id="contato" name="contato" placeholder="Para o caso de precisarmos falar com você">
         </div>
         <div class="rsvp__row">
           <label for="acompanhantes">Quantas pessoas (incluindo você)</label>
@@ -559,11 +570,11 @@
   <!-- ============================================= -->
   <div class="cart-modal" id="cartModal" hidden>
     <div class="cart-modal__overlay" id="closeCartOverlay"></div>
-    <div class="cart-modal__content">
+    <div class="cart-modal__content" role="dialog" aria-modal="true" aria-labelledby="cartModalTitle">
       <button class="cart-modal__close" id="closeCartBtn" aria-label="Fechar">&times;</button>
-      
-      <h2 class="cart-modal__title">Meu Carrinho</h2>
-      
+
+      <h2 class="cart-modal__title" id="cartModalTitle">Meu Carrinho</h2>
+
       <div class="cart-items" id="cartItemsContainer">
         <p class="cart-empty-msg">Seu carrinho está vazio.</p>
       </div>
@@ -604,12 +615,12 @@
   <!-- ============================================= -->
   <div class="payment-modal" id="paymentModal" hidden>
     <div class="payment-modal__overlay" id="closePaymentOverlay"></div>
-    <div class="payment-modal__content">
+    <div class="payment-modal__content" role="dialog" aria-modal="true" aria-labelledby="paymentModalTitle">
       <button class="cart-modal__close" id="closePaymentBtn" aria-label="Fechar">&times;</button>
-      
-      <h3 class="payment-modal__title">Selecione como deseja pagar</h3>
+
+      <h3 class="payment-modal__title" id="paymentModalTitle">Selecione como deseja pagar</h3>
       <p class="payment-modal__subtitle">Escolha a melhor opção para concluir o presente de Layla &amp; Geovane:</p>
-      
+
       <div class="payment-options">
         <button class="payment-option" id="payPixModalBtn">
           <div class="payment-option__icon">❖</div>
