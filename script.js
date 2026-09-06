@@ -465,3 +465,140 @@ function initTiltEffect() {
 }
 
 document.addEventListener('DOMContentLoaded', initTiltEffect);
+
+// =====================================================================
+// LIGHTBOX DA GALERIA
+// =====================================================================
+function initLightbox() {
+  const items = Array.from(document.querySelectorAll('[data-lightbox-item] img'));
+  if (!items.length) return;
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const counter = document.getElementById('lightboxCounter');
+  const overlay = document.getElementById('lightboxOverlay');
+  const closeBtn = document.getElementById('lightboxClose');
+  const prevBtn = document.getElementById('lightboxPrev');
+  const nextBtn = document.getElementById('lightboxNext');
+
+  let currentIndex = 0;
+
+  function show(index) {
+    currentIndex = (index + items.length) % items.length;
+    const img = items[currentIndex];
+    lightboxImg.src = img.currentSrc || img.src;
+    lightboxImg.alt = img.alt || '';
+    counter.textContent = `${currentIndex + 1} / ${items.length}`;
+  }
+
+  function open(index) {
+    show(index);
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  items.forEach((img, index) => {
+    // Só abre o lightbox se a foto de fato carregou (evita abrir vazio
+    // quando o placeholder ainda não foi substituído pela foto real).
+    img.closest('figure').addEventListener('click', () => {
+      if (img.closest('.gallery__item--empty')) return;
+      open(index);
+    });
+  });
+
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', close);
+  prevBtn.addEventListener('click', () => show(currentIndex - 1));
+  nextBtn.addEventListener('click', () => show(currentIndex + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.hidden) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(currentIndex - 1);
+    if (e.key === 'ArrowRight') show(currentIndex + 1);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initLightbox);
+
+// =====================================================================
+// ANIMAÇÕES DE ENTRADA AO ROLAR A PÁGINA (scroll reveal)
+// =====================================================================
+function initScrollReveal() {
+  const revealEls = document.querySelectorAll('.reveal');
+  if (!revealEls.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    revealEls.forEach((el) => el.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+  revealEls.forEach((el) => observer.observe(el));
+}
+
+document.addEventListener('DOMContentLoaded', initScrollReveal);
+
+// =====================================================================
+// BARRA FLUTUANTE MOBILE (RSVP + COMPARTILHAR)
+// =====================================================================
+function initFloatbar() {
+  const floatbar = document.getElementById('floatbar');
+  const hero = document.getElementById('topo');
+  const footer = document.querySelector('.footer');
+  if (!floatbar || !hero) return;
+
+  function updateVisibility() {
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    const footerTop = footer ? footer.getBoundingClientRect().top : Infinity;
+    const pastHero = heroBottom < 0;
+    const beforeFooter = footerTop > window.innerHeight;
+    floatbar.hidden = !(pastHero && beforeFooter);
+    if (!floatbar.hidden) {
+      requestAnimationFrame(() => floatbar.classList.add('is-visible'));
+    } else {
+      floatbar.classList.remove('is-visible');
+    }
+  }
+
+  window.addEventListener('scroll', updateVisibility, { passive: true });
+  window.addEventListener('resize', updateVisibility);
+  updateVisibility();
+}
+
+document.addEventListener('DOMContentLoaded', initFloatbar);
+
+// =====================================================================
+// COMPARTILHAR CONVITE VIA WHATSAPP
+// =====================================================================
+function initShareButtons() {
+  const shareText = 'Vamos nos casar! 💍 Layla & Geovane vão se casar em 30 de setembro de 2028. Confira todos os detalhes e confirme sua presença:';
+  const shareUrl = window.location.href.split('#')[0];
+
+  function shareInvite() {
+    const message = `${shareText} ${shareUrl}`;
+    if (navigator.share) {
+      navigator.share({ title: 'Layla & Geovane — Vamos nos casar!', text: shareText, url: shareUrl }).catch(() => {});
+    } else {
+      window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+    }
+  }
+
+  document.getElementById('shareBtn')?.addEventListener('click', shareInvite);
+  document.getElementById('shareBtnDesktop')?.addEventListener('click', shareInvite);
+}
+
+document.addEventListener('DOMContentLoaded', initShareButtons);
