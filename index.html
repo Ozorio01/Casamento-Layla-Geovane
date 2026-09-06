@@ -50,6 +50,17 @@
     </ul>
   </nav>
 
+  <!-- ============================================= -->
+  <!-- BARRA FLUTUANTE (MOBILE) — RSVP + COMPARTILHAR -->
+  <!-- Aparece depois que o convidado rola a página, some perto do rodapé -->
+  <!-- ============================================= -->
+  <div class="floatbar" id="floatbar" hidden>
+    <a href="#presenca" class="floatbar__btn floatbar__btn--primary">Confirmar presença</a>
+    <button type="button" class="floatbar__btn floatbar__btn--icon" id="shareBtn" aria-label="Compartilhar convite">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+    </button>
+  </div>
+
  <!-- ============================================= -->
   <!-- CAPA / HERO -->
   <!-- ============================================= -->
@@ -89,7 +100,13 @@
       </div>
       <p class="countdown__today" id="countdownToday" hidden>É hoje! 🎉</p>
 
-      <a href="#presenca" class="hero__cta">Confirmar presença</a>
+      <div class="hero__actions">
+        <a href="#presenca" class="hero__cta">Confirmar presença</a>
+        <button type="button" class="hero__share" id="shareBtnDesktop">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          Compartilhar convite
+        </button>
+      </div>
     </div>
   </header>
 
@@ -97,7 +114,7 @@
   <!-- NOSSA HISTÓRIA -->
   <!-- ============================================= -->
   <section class="section section--ivory" id="historia">
-    <div class="section__inner">
+    <div class="section__inner reveal">
       <p class="section__eyebrow">O casal</p>
       <h2 class="section__title">Nossa história</h2>
       <div class="story">
@@ -132,7 +149,7 @@ E a nossa está apenas começando um novo capítulo.
        cards de acordo com o número real de padrinhos/madrinhas. -->
   <!-- ============================================= -->
   <section class="section section--sage" id="padrinhos">
-    <div class="section__inner">
+    <div class="section__inner reveal">
       <p class="section__eyebrow">Ao nosso lado</p>
       <h2 class="section__title">Padrinhos &amp; Madrinhas</h2>
       <p class="section__lead">
@@ -175,7 +192,7 @@ E a nossa está apenas começando um novo capítulo.
   <!-- CERIMÔNIA -->
   <!-- ============================================= -->
   <section class="section section--forest" id="cerimonia">
-    <div class="section__inner">
+    <div class="section__inner reveal">
       <p class="section__eyebrow section__eyebrow--light">Onde e quando</p>
       <h2 class="section__title section__title--light">Cerimônia &amp; recepção</h2>
       <div class="details">
@@ -245,37 +262,81 @@ E a nossa está apenas começando um novo capítulo.
   <!-- GALERIA DE FOTOS -->
   <!-- ============================================= -->
   <section class="section section--ivory" id="galeria">
-    <div class="section__inner">
+    <div class="section__inner reveal">
       <p class="section__eyebrow">Momentos</p>
       <h2 class="section__title">Galeria</h2>
       <div class="gallery">
-        <figure class="gallery__item" data-tilt>
+        <figure class="gallery__item" data-tilt data-lightbox-item>
           <img src="img/foto1.jpg" alt="Foto 1 do casal" onerror="this.closest('.gallery__item').classList.add('gallery__item--empty')">
         </figure>
-        <figure class="gallery__item" data-tilt>
+        <figure class="gallery__item" data-tilt data-lightbox-item>
           <img src="img/foto2.jpg" alt="Foto 2 do casal" onerror="this.closest('.gallery__item').classList.add('gallery__item--empty')">
         </figure>
-        <figure class="gallery__item" data-tilt>
+        <figure class="gallery__item" data-tilt data-lightbox-item>
           <img src="img/foto3.jpg" alt="Foto 3 do casal" onerror="this.closest('.gallery__item').classList.add('gallery__item--empty')">
         </figure>
-        <figure class="gallery__item" data-tilt>
+        <figure class="gallery__item" data-tilt data-lightbox-item>
           <img src="img/foto4.jpg" alt="Foto 4 do casal" onerror="this.closest('.gallery__item').classList.add('gallery__item--empty')">
         </figure>
-        <figure class="gallery__item" data-tilt>
+        <figure class="gallery__item" data-tilt data-lightbox-item>
           <img src="img/foto5.jpg" alt="Foto 5 do casal" onerror="this.closest('.gallery__item').classList.add('gallery__item--empty')">
         </figure>
-        <figure class="gallery__item" data-tilt>
+        <figure class="gallery__item" data-tilt data-lightbox-item>
           <img src="img/foto6.jpg" alt="Foto 6 do casal" onerror="this.closest('.gallery__item').classList.add('gallery__item--empty')">
         </figure>
       </div>
     </div>
   </section>
-     
+
   <!-- ============================================= -->
-  <!-- CONFIRMAR PRESENÇA -->
+  <!-- LIGHTBOX DA GALERIA -->
+  <!-- ============================================= -->
+  <div class="lightbox" id="lightbox" hidden>
+    <div class="lightbox__overlay" id="lightboxOverlay"></div>
+    <button class="lightbox__close" id="lightboxClose" aria-label="Fechar">&times;</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Foto anterior">&#8249;</button>
+    <img class="lightbox__img" id="lightboxImg" src="" alt="">
+    <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Próxima foto">&#8250;</button>
+    <p class="lightbox__counter" id="lightboxCounter"></p>
+  </div>
+
+  <!-- ============================================= -->
+  <!-- PERGUNTAS FREQUENTES -->
+  <!-- ============================================= -->
+  <section class="section section--sage" id="faq">
+    <div class="section__inner section__inner--narrow reveal">
+      <p class="section__eyebrow">Dúvidas comuns</p>
+      <h2 class="section__title">Perguntas Frequentes</h2>
+      <div class="faq">
+        <details class="faq__item">
+          <summary>Posso levar meu filho(a)?</summary>
+          <p>Filhos até 8 anos. Agradecemos a compreensão! 💛</p>
+        </details>
+        <details class="faq__item">
+          <summary>Existe estacionamento no local?</summary>
+          <p>Sim, o Rancho Verde Eventos possui estacionamento próprio e gratuito para os convidados.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Até quando posso confirmar presença?</summary>
+          <p>Pedimos que a confirmação seja feita até <strong>30 de agosto de 2028</strong>, para nos ajudar na organização do buffet e dos lugares.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Vou receber um convite físico?</summary>
+          <p>Sim, mas este site é o nosso convite oficial também! Guarde o link para acompanhar todas as informações do grande dia.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Qual o traje ideal?</summary>
+          <p>O traje é esporte fino. Pedimos apenas para evitar branco e off-white, cor reservada para a noiva.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- CONFIRMAR PRESENÇA (RSVP) -->
   <!-- ============================================= -->
   <section class="section section--forest" id="presenca">
-    <div class="section__inner section__inner--narrow">
+    <div class="section__inner section__inner--narrow reveal">
       <p class="section__eyebrow section__eyebrow--light">RSVP</p>
       <h2 class="section__title section__title--light">Confirme sua presença</h2>
       <p class="section__lead" style="color: var(--ink-blue); font-weight: 500;">
@@ -338,7 +399,7 @@ E a nossa está apenas começando um novo capítulo.
   <!-- PRESENTES / LISTA VIRTUAL COM CARRINHO -->
   <!-- ============================================= -->
   <section class="section section--ivory" id="presentes">
-    <div class="section__inner">
+    <div class="section__inner reveal">
       <p class="section__eyebrow">Mimos para os Noivos</p>
       <h2 class="section__title">Lista de Presentes</h2>
       <p class="section__lead">
