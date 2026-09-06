@@ -1331,3 +1331,197 @@ a { color: inherit; }
   margin: 0 auto 20px;
   opacity: 0.5;
 }
+/* =================================================================
+   AÇÕES DO HERO (RSVP + COMPARTILHAR NO DESKTOP)
+   ================================================================= */
+.hero__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.hero__share {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 22px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.hero__share:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--white);
+}
+
+/* =================================================================
+   BARRA FLUTUANTE (MOBILE) — RSVP + COMPARTILHAR
+   ================================================================= */
+.floatbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 500;
+  display: none;
+  gap: 10px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: rgba(248, 245, 240, 0.92);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--sage-line);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.floatbar.is-visible { transform: translateY(0); }
+
+@media (max-width: 760px) {
+  .floatbar { display: flex; }
+}
+
+.floatbar__btn {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  cursor: pointer;
+}
+
+.floatbar__btn--primary {
+  flex: 1;
+  background: var(--gold-deep);
+  color: var(--white);
+}
+
+.floatbar__btn--icon {
+  flex: 0 0 auto;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--forest-deep);
+  color: var(--white);
+}
+
+/* =================================================================
+   LIGHTBOX DA GALERIA
+   ================================================================= */
+.gallery__item { cursor: zoom-in; }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox[hidden] { display: none; }
+
+.lightbox__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.92);
+}
+
+.lightbox__img {
+  position: relative;
+  max-width: min(90vw, 1000px);
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  animation: lightboxIn 0.25s ease;
+}
+
+@keyframes lightboxIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 2.2rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--white);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox__nav--prev { left: 16px; }
+.lightbox__nav--next { right: 16px; }
+
+.lightbox__counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--sage);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 640px) {
+  .lightbox__nav { width: 40px; height: 40px; font-size: 1.4rem; }
+  .lightbox__close { top: 12px; right: 16px; }
+}
+
+/* =================================================================
+   ANIMAÇÕES DE ENTRADA AO ROLAR A PÁGINA
+   Aplicado via JS (classe .reveal + .is-visible ao entrar na viewport)
+   ================================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
